@@ -1,0 +1,29 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+p{
+    color: #efe6e6;
+}
+
+.container{
+    background-color: #01172F;
+}
+
+.navbar{
+    background-color: #01172F;
+}
+
+.navbar-brand{
+    color: #efe6e6;
+  }
+
+.nav-link{
+    color: #efe6e6;
+}
+
+.pagina{
+    background-color: #01172F;
+    color: #efe6e6;
+}
+
