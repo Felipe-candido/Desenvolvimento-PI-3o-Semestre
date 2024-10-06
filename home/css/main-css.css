@@ -10,6 +10,10 @@ p{
     background-color: #01172F;
 }
 
+.header{
+    background-color: #01172F;
+}
+
 .navbar{
     background-color: #01172F;
 }
@@ -22,8 +26,25 @@ p{
     color: #efe6e6;
 }
 
-.pagina{
+.pagina-header{
     background-color: #01172F;
     color: #efe6e6;
 }
 
+.middle-page{
+    background-color: #01172F;
+}
+
+.texto-principal{
+    margin-top: 150px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.titulo-principal{
+    font-size: 28pt;
+}
+
+.cards{
+    background-color: #01172F;
+}
