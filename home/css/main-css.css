@@ -26,6 +26,10 @@ p{
     color: #efe6e6;
 }
 
+.nav{
+    font-size: 15pt;
+}
+
 .pagina-header{
     background-color: #01172F;
     color: #efe6e6;
@@ -46,5 +50,9 @@ p{
 }
 
 .cards{
+    background-color: #01172F;
+}
+
+.sobre-nos{
     background-color: #01172F;
 }
