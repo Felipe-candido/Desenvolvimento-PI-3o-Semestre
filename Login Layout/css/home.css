@@ -1,0 +1,169 @@
+body, ul {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+    padding: 2px 20px;
+    color: #000000;
+    z-index: 1000;
+    border-bottom: 1px solid #000;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    font-size: 1.5em;
+    color: #001AFF;
+}
+
+.logo p:hover {
+    color: #001AFF;
+}
+
+.about {
+    position: relative;
+    left: 5em;
+}
+
+.nav-items {
+    list-style-type: none;
+    display: flex; 
+    margin-left: auto;
+    font-size: 16px;
+}
+
+.nav-items li {
+    margin: 0 15px;
+}
+
+.nav-items a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+.nav-items a:hover {
+    color: #001AFF;
+}
+
+.access {
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+}
+
+#Logar {
+    color: #000000;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s;
+    position: relative;
+    right: 1em;
+}
+
+#Logar:hover {
+    color: #001AFF;
+}
+
+#Cadastrar {
+    font-size: 1.2em;
+    background-color: #727EEF;
+    color: #ffffff;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px 20px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+#Cadastrar:hover {
+    background-color: #000a66;
+}
+
+.texto{
+    width: 65vh;
+    border: 1px solid black;
+    background-color: aqua;
+    display: inline-block;
+}
+.imagem{
+    display: inline-block;
+    border: 1px solid black;
+    width: 35vh;
+    background-color: brown;
+}
+
+
+
+
+
+@media (max-width: 991px) {
+    .offcanvas .nav-items {
+        flex-direction: column;
+        align-items: flex-start; 
+        width: 100%;
+        overflow: none;
+    }
+
+    .about{
+        position: relative;
+        left: 0em;
+        /* overflow-x: hidden; */
+        overflow: hidden;
+    }
+
+    .access{
+        flex-direction: column;
+        align-items: center; 
+        width: 100%;
+        position: relative;
+        top: 1em;
+        margin: 0;
+        padding: 0;
+        /* left: 20px; */
+    }
+    .nav-link{
+        border-bottom: 1px solid black;
+        width: 100vh;
+        position: relative;
+        left: -15px;
+    }
+
+    #Logar {
+        width: 100%; 
+        /* display: inline-block; */
+        /* text-align: center;  */
+        position: relative;
+        padding: 5px 184%;
+        left: -11.5px;
+        font-size: 1.2em;
+        text-decoration: none; 
+        background-color: #053b81; 
+        color: rgb(255, 255, 255);
+        border: 1px solid black;
+        border-radius: 5px;
+        /* display: inline; */
+        overflow: hidden;
+        transition: background-color 0.3s; 
+    }
+    
+    #Logar:hover {
+        color: white;
+        background-color: #1b79f3;
+    }
+    
+    #Cadastrar {
+        width: 100%; 
+        position: relative;
+        top: 0.5em;
+        left: -0.4em;
+        overflow: hidden;
+        padding: 5px 88%;
+    }
+
+
+}
