@@ -1,0 +1,10 @@
+body{
+    background-color: rgb(230, 230, 230);
+}
+.form-container{
+    max-width: 550px;
+    padding: 1rem;
+    background-color: white;
+    border: solid 1px white;
+    border-radius: 20px;
+}
