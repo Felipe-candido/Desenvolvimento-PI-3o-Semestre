@@ -8,3 +8,8 @@ body{
     border: solid 1px white;
     border-radius: 20px;
 }
+
+.form-select {
+    z-index: 10; 
+    position: relative; 
+}
