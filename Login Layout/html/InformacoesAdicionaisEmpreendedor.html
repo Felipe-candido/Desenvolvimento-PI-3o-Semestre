@@ -11,31 +11,26 @@
     <main class="w-100 m-auto form-container">
         <form>
             <h1 class="h3 mb-3 fw-normal text-center">Registre-se</h1>
-            <!-- Nome da Empresa -->
+            <!-- Área de Interesse de Investimento -->
              <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="floatingNomeEmpresa" placeholder="Nome da Startup">
-                <label for="floatingNomeEmpresa">Nome da Startup</label>
+                <input type="text" class="form-control" id="floatingInteresse" placeholder="Interesse">
+                <label for="floatingNomeEmpresa">Área de Interesse</label>
              </div>
-            <!-- CNPJ -->   <!-- Setor de Atuação -->
+            <!-- Valor Médio de Investimento -->   <!-- Capital Disponível para Investir -->
             <div class="row mb-2">
                 <div class="col-md-6"> 
                     <div class="form-floating mb-2">
-                        <input type="text" class="form-control" id="floatingCnpj" placeholder="CNPJ">
-                        <label for="floatingCnpj">CNPJ</label>
+                        <input type="number" class="form-control" id="floatingMedia" step="0.01" min="0" placeholder="Media de investimento">
+                        <label for="floatingCnpj">Média de Investimento</label>
                     </div>
                 </div>
                 <div class="col-md-6"> 
                     <div class="form-floating mb-2">
-                        <input type="text" class="form-control" id="floatingSetorAtuacao" placeholder="Setor Atuação">
-                        <label for="floatingSetorAtuacao">Setor Atuação</label>
+                        <input type="number" class="form-control" id="floatingCapital" step="0.01" min="0" placeholder="Capital disponível">
+                        <label for="floatingSetorAtuacao">Capital Disponível</label>
                     </div>
                 </div>
             </div>
-            <!-- Website -->
-             <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="floatingWebSite" placeholder="Website">
-                <label for="floatingWebSite">Website</label>
-             </div>
             <!-- Endereço Comercial -->
             <div class="row mb-2">
                 <h2 class="h3 mb-3 fw-normal">Endereço</h2>
