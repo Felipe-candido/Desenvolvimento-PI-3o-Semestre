@@ -7,6 +7,7 @@ from datetime import date
 from django.utils import timezone
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate
+from django.contrib.sessions.models import Session
 
 
 def add_usuario(request):
@@ -55,6 +56,10 @@ def realizar_login(request):
             return redirect('realizar_login')  
 
     return render(request, 'login.html')
+
+def logout(request):
+    Session.objects.all().delete()
+    return redirect("/")
 
 def home(request):
  return render(request, 'home/home.html', {'user': request.user})
