@@ -9,10 +9,20 @@ class usuario_forms(forms.ModelForm):
     
     class Meta:
         model = usuario
-        fields = {"email", "nome", "genero", "telefone", "data_nascimento", "senha"}
+        fields = ["email", "nome", "genero", "telefone", "data_nascimento", "senha"]
         widgets = {
             'data_nascimento': forms.DateInput(attrs={'type': 'date'}),  
         }
+        
+    def clean_email(self):
+        this_email = self.cleaned_data.get('email')
+        try:
+            if usuario.objects.filter(email=this_email).exists():
+                raise ValidationError('Esse e-mail já está cadastrado.')
+        except Exception as e:
+            raise ValidationError(f'Esse e-mail já está cadastrado.')
+        return this_email
+        
         
     def clean_telefone(self):
         telefone = self.cleaned_data['telefone']

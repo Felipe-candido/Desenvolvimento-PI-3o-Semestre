@@ -45,11 +45,13 @@ def add_usuario(request):
 def add_usuario2(request):         
     if request.method == 'POST':
         form = usuario_forms(request.POST)
+        
         if form.is_valid():
             form.save()
             messages.success(request, "Usuário registrado com sucesso!")
             return redirect('/')
-            
+        
+        messages.error(request, "Por favor, corrija os erros abaixo.")    
         context = {
             'form': form
         }
