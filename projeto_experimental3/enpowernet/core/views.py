@@ -9,6 +9,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate
 from django.contrib.sessions.models import Session
 from core.forms import usuario_forms
+from core.services.user_service import construir_nome_exibicao, construir_numero_telefone
 
 
 def add_usuario(request):
@@ -93,3 +94,11 @@ def logout(request):
 
 def home(request):
  return render(request, 'home/home.html', {'user': request.user})
+
+def perfil(request):
+
+    user = request.user
+    nome_exibicao = construir_nome_exibicao(user.nome)
+    numero_celular = construir_numero_telefone(user.telefone)
+
+    return render(request, 'index/perfil.html', {'nome_exibicao': nome_exibicao, 'numero_celular': numero_celular})
