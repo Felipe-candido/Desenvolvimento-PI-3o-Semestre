@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil do Empreendedor</title>
+    <title>Perfil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/main-css.css">
+    <link rel="stylesheet" href="css/main-css.css">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 
                 <a class="navbar-brand d-flex align-items-center" href="#">
-                    <img src="/imagens/icone-logo.png" alt="Logo" width="30" height="24"
+                    <img src="imagens/icone-logo.png" alt="Logo" width="30" height="24"
                         class="d-inline-block align-text-top d-flex">
                     <span class="ms-2">ENPOWERNET</span>
                 </a>
@@ -44,16 +44,21 @@
                 <!-- Sidebar de Informações do Usuário -->
                 <div class="col-md-4">
                     <div class="profile-sidebar">
-                        <img src="https://via.placeholder.com/150" alt="Foto do Usuário" class="profile-img mb-3">
+                        <div class="d-flex justify-content-center mb-3">
+                            <img src="imagens/sem_perfil.png" alt="Foto do Usuário" class="profile-img">
+                        </div>
+                        <div class="d-flex justify-content-center mb-3">
+                            <a href="#" class="btn btn-primary">Editar Perfil</a>
+                        </div>
                         <h3 class="text-center">Nome do Empreendedor</h3>
                         <p class="text-muted text-center">Cargo/Função</p>
                         <hr>
                         <h5>Informações de Contato</h5>
-                        <p><strong>Email:</strong> usuario@exemplo.com</p>
-                        <p><strong>Telefone:</strong> (XX) XXXXX-XXXX</p>
+                        <p class="text-muted"><strong>Email:</strong> usuario@exemplo.com</p>
+                        <p class="text-muted"><strong>Telefone:</strong> (XX) XXXXX-XXXX</p>
                         <hr>
                         <h5>Sobre</h5>
-                        <p>
+                        <p class="text-muted">
                             Descrição breve sobre o empreendedor, suas habilidades e experiência profissional. Aqui é possível
                             descrever o que o empreendedor faz e seus interesses no setor.
                         </p>
@@ -69,7 +74,7 @@
                     <div class="card project-card">
                         <div class="card-body">
                             <h5 class="card-title">Nome do Projeto 1</h5>
-                            <p class="card-text">
+                            <p class="card-text text-muted">
                                 Descrição curta do projeto postado pelo empreendedor. Aqui pode conter uma visão geral sobre o
                                 que o projeto faz e como ele pode impactar o mercado.
                             </p>
@@ -81,7 +86,7 @@
                     <div class="card project-card">
                         <div class="card-body">
                             <h5 class="card-title">Nome do Projeto 2</h5>
-                            <p class="card-text">
+                            <p class="card-text text-muted">
                                 Outra descrição curta de um segundo projeto. O usuário pode ter vários projetos aqui, mostrando
                                 suas iniciativas e inovações.
                             </p>
@@ -93,7 +98,7 @@
                     <div class="card project-card">
                         <div class="card-body">
                             <h5 class="card-title">Nome do Projeto 3</h5>
-                            <p class="card-text">
+                            <p class="card-text text-muted">
                                 Descrição de um terceiro projeto, destacando ideias inovadoras ou propostas de negócio para
                                 investidores.
                             </p>

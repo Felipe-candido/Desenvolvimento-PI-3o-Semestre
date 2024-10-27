@@ -1,0 +1,72 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+p{
+    color: #efe6e6;
+}
+
+body{
+    background-color: #01172F;
+}
+
+.container-fluid{
+    background-color: #01172F;
+}
+
+.container{
+    background-color: #01172F;
+}
+
+.header{
+    background-color: #01172F;
+}
+
+.navbar{
+    background-color: #01172F;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.navbar-brand{
+    color: #efe6e6;
+}
+
+.nav-link{
+    color: #efe6e6;
+}
+
+.nav{
+    font-size: 15pt;
+}
+
+.titulo-projetos{
+    color: #efe6e6;
+}
+
+.profile-sidebar {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.project-card {
+    margin-bottom: 20px;
+}
+
+.project-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-edit {
+    margin-top: 10px;
+}
+
+

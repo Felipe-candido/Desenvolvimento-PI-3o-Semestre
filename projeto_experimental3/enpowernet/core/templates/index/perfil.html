@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'perfil/css/main-css.css' %}">
+</head>
+
+<body>
+    
+    <nav class="navbar">
+        <div class="container p-3 border-bottom">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="{% static 'perfil/imagens/icone-logo.png' %}" alt="Logo" width="30" height="24"
+                        class="d-inline-block align-text-top d-flex">
+                    <span class="ms-2">ENPOWERNET</span>
+                </a>
+
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a href="{% url 'home' %}" class="nav-link" aria-current="page">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contatos</a></li>
+                    <li class="nav-item"><a href="#sobre" class="nav-link">Sobre </a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"></a></li>
+                </ul>
+
+                <div class="text-end">
+                    {% if user.is_authenticated %}
+                        <span class="navbar-text text-light me-2">{{ nome_exibicao }}</span>
+                        <button type="button" class="btn btn-outline-light" onclick="window.location.href='{% url 'logout' %}'">Logout</button>
+                    {% else %}
+                        <button type="button" class="btn btn-outline-light me-2" onclick="window.location.href='{% url 'realizar_login' %}'">Login</button>
+                        <button type="button" class="btn btn-warning" onclick="window.location.href='{% url 'add_usuario2' %}'">Sign-up</button>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    {% if user.is_authenticated %}
+
+        <div class="container-fluid mt-5">
+            <div class="container">
+                <div class="row">
+                    <!-- Sidebar de Informações do Usuário -->
+                    <div class="col-md-4">
+                        <div class="profile-sidebar">
+                            <div class="d-flex justify-content-center mb-3">
+                                <img src="{% static 'perfil/imagens/sem_perfil.png' %}" alt="Foto do Usuário" class="profile-img">
+                            </div>
+                            <h3 class="text-center">{{nome_exibicao}}</h3>
+                            <p class="text-muted text-center">Cargo/Função</p>
+                            <hr>
+                            <h5>Informações de Contato</h5>
+                            <p class="text-muted"><strong>Email:</strong> {{user.email}}</p>
+                            <p class="text-muted"><strong>Telefone:</strong> {{numero_celular}}</p>
+                            <hr>
+                            <h5>Sobre</h5>
+                            <p class="text-muted">
+                                Descrição breve sobre o empreendedor, suas habilidades e experiência profissional. Aqui é possível
+                                descrever o que o empreendedor faz e seus interesses no setor.
+                            </p>
+                            <a href="#" class="btn btn-primary btn-edit w-100">Editar Perfil</a>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Projetos do Empreendedor -->
+                    <div class="col-md-8">
+                        <h3 class="mb-4 titulo-projetos">Projetos Postados</h3>
+
+                        <!-- Card de Projeto 1 -->
+                        <div class="card project-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Nome do Projeto 1</h5>
+                                <p class="card-text text-muted">
+                                    Descrição curta do projeto postado pelo empreendedor. Aqui pode conter uma visão geral sobre o
+                                    que o projeto faz e como ele pode impactar o mercado.
+                                </p>
+                                <a href="#" class="btn btn-warning">Ver Detalhes</a>
+                            </div>
+                        </div>
+
+                        <!-- Card de Projeto 2 -->
+                        <div class="card project-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Nome do Projeto 2</h5>
+                                <p class="card-text text-muted">
+                                    Outra descrição curta de um segundo projeto. O usuário pode ter vários projetos aqui, mostrando
+                                    suas iniciativas e inovações.
+                                </p>
+                                <a href="#" class="btn btn-warning">Ver Detalhes</a>
+                            </div>
+                        </div>
+
+                        <!-- Card de Projeto 3 -->
+                        <div class="card project-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Nome do Projeto 3</h5>
+                                <p class="card-text text-muted">
+                                    Descrição de um terceiro projeto, destacando ideias inovadoras ou propostas de negócio para
+                                    investidores.
+                                </p>
+                                <a href="#" class="btn btn-warning">Ver Detalhes</a>
+                            </div>
+                        </div>
+
+                        <!-- Mais projetos podem ser adicionados -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+            <p>Batata</p>
+        {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
