@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+   <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Optional: Link to your CSS -->
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="POST" action="{% url 'realizar_login' %}">
+            {% csrf_token %}
+            <div>
+                <label for="email">E-Mail:</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div>
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha" required>
+            </div>
+            <div>
+                <button type="submit">Entrar</button>
+            </div>
+        </form>
+
+        <div>
+            <p>Não tem uma conta? <a href="{% url 'add_usuario2' %}">Registre-se aqui</a>.</p>
+        </div>
+    </div>
+</body>
+</html>
