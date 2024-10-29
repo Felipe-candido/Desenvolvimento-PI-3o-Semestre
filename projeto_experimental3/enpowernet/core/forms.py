@@ -4,7 +4,7 @@ from .models import usuario
 from django.core.exceptions import ValidationError
 from datetime import date
 
-class usuario_forms(forms.ModelForm):
+class cadastro_forms(forms.ModelForm):
     senha = forms.CharField(widget=forms.PasswordInput, label='Senha')
     
     class Meta:

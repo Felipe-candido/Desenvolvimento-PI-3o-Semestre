@@ -8,7 +8,7 @@ from django.utils import timezone
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate
 from django.contrib.sessions.models import Session
-from core.forms import usuario_forms
+from core.forms import cadastro_forms
 from core.services.user_service import construir_nome_exibicao, construir_numero_telefone
 
 
@@ -45,7 +45,7 @@ def add_usuario(request):
 # registro usando ModelForms
 def add_usuario2(request):         
     if request.method == 'POST':
-        form = usuario_forms(request.POST)
+        form = cadastro_forms(request.POST)
         
         if form.is_valid():
             form.save()
@@ -58,7 +58,7 @@ def add_usuario2(request):
         }
         return render(request, 'registro.html', context) 
     
-    form = usuario_forms()
+    form = cadastro_forms()
     context = {
         'form': form
     }
