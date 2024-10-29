@@ -1,0 +1,99 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0033cc, #66ccff);
+    margin: 0;
+}
+
+.btn-voltar{
+    align-items: end;
+    width: 100%;
+    background-color: #004080;
+    color: white;
+    border: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.container {
+    background: white;
+    width: 600px;
+    max-width: 95%;
+    border-radius: 10px;
+    box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    padding: 0;
+
+}
+
+.container_top {
+    background-color: 0033cc;
+    color: white; 
+    text-align: center;
+    margin: 0; 
+
+}
+
+.header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.form-section {
+    padding: 2rem 2rem;
+    text-align: center;
+    margin: 0; /* Remover margem extra */
+}
+
+.form-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: #0059b3;
+    font-weight: bold;
+}
+
+.form-control {
+    margin-bottom: 1.2rem;
+    border-radius: 20px;
+    background: #cce6ff;
+    border: none;
+    padding-left: 1rem;
+    font-size: 1rem;
+}
+
+.btn-login {
+    width: 100%;
+    background-color: #004080;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 0.6rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.form-footer a {
+    color: #0059b3;
+    text-decoration: none;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
