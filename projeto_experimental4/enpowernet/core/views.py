@@ -1,73 +1,34 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from .models import usuario
-from django.contrib.auth import login
+from .models import usuario, projeto
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from datetime import date
 from django.utils import timezone
-from django.contrib.auth.hashers import make_password, check_password
-from django.contrib.auth import authenticate
-from django.contrib.sessions.models import Session
 from core.forms import cadastro_forms
-from core.services.user_service import construir_nome_exibicao, construir_numero_telefone
+import uuid
+from django.contrib.sessions.models import Session
 
-
-def add_usuario(request):
-    if request.method == 'POST':
-        name = request.POST.get("nome")
-        mail = request.POST.get("email")
-        pwd = request.POST.get("senha")
-        gender = request.POST.get("genero")
-        phone = request.POST.get("telefone")
-        birth_date = request.POST.get("data_nascimento")
-
-        if usuario.objects.filter(email=mail).exists():
-            messages.error(request, "E-mail já cadastrado, insira um e-mail válido.")
-            return redirect('registro')
-        
-       
-        users = usuario(
-            nome=name, 
-            email=mail, 
-            genero=gender, 
-            telefone=phone,
-            data_nascimento=date.fromisoformat(birth_date)
-        )
-        
-        users.set_password(pwd)  #depois preciso explicar o que eu fiz na classe
-        users.save()
-
-        messages.success(request, "Usuário registrado com sucesso!")
-        return redirect("/") 
-    return render(request, 'registro.html')
-
-
-# registro usando ModelForms
-def add_usuario2(request):         
+def add_usuario2(request):                 
     if request.method == 'POST':
         form = cadastro_forms(request.POST)
         
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.UUID = str(uuid.uuid4())  # Gepeteco decidiu isso, se der errado me avisa
+            user.set_password(form.cleaned_data['senha'])
+            user.save()
+            
             messages.success(request, "Usuário registrado com sucesso!")
             return redirect('/')
-            
-        context = {
-            'form': form
-        }
+        
+        context = {'form': form}
         return render(request, 'registro.html', context) 
     
     form = cadastro_forms()
-    context = {
-        'form': form
-    }
+    context = {'form': form}
     return render(request, 'registro.html', context)
-
-
-
-
-
-
 
 def realizar_login(request):
     if request.method == 'POST':
@@ -77,7 +38,7 @@ def realizar_login(request):
         user = authenticate(request, email=email, password=senha)
 
         if user is not None:
-            user.last_login = timezone.now()  # O login simplesmente não funciona sem isso
+            user.last_login = timezone.now()
             user.save(update_fields=['last_login'])
             login(request, user)
             return redirect("/")  
@@ -92,12 +53,33 @@ def logout(request):
     return redirect("/")
 
 def home(request):
- return render(request, 'home/home.html', {'user': request.user})
+    return render(request, 'home/home.html', {'user': request.user})
 
 def perfil(request):
-
     user = request.user
-    nome_exibicao = construir_nome_exibicao(user.nome)
-    numero_celular = construir_numero_telefone(user.telefone)
+    return render(request, 'index/perfil.html', {'user': user})
 
-    return render(request, 'index/perfil.html', {'nome_exibicao': nome_exibicao, 'numero_celular': numero_celular})
+@login_required
+def criar_projeto(request):
+    if request.method == "POST":
+        title = request.POST.get("titulo")
+        description = request.POST.get("descricao")
+        meta = request.POST.get("meta_investidor")
+
+        project = projeto(
+            titulo=title,
+            descricao=description,
+            user_id=request.user.UUID,
+            meta_investidor=meta
+        )
+
+        project.save()
+        messages.success(request, "Projeto foi criado")
+        return redirect("perfil/")
+
+    return render(request, 'index/perfil.html')
+
+@login_required
+def buscar_projetos(request):
+    project = projeto.objects.filter(user_id=request.user.UUID)
+    return render(request, 'index/projetos.html', {'projetos': project})

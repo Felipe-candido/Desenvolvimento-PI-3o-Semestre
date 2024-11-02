@@ -1,5 +1,4 @@
 import uuid
-from bson.binary import Binary
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from dateutil.relativedelta import relativedelta
@@ -26,12 +25,12 @@ class usuario(AbstractBaseUser):
         ('M', 'Masculino'),
         ('I', 'Indefinido'),  
     )
-    UUID = models.BinaryField(primary_key=True, editable=False) 
+    UUID = models.CharField(max_length=36, primary_key=True, default=lambda: str(uuid.uuid4()), editable=False) 
     email = models.EmailField(unique=True)
     nome = models.CharField(max_length=255)
     genero = models.CharField(max_length=1, choices=escolha_genero)
     telefone = models.CharField(max_length=11)
-    data_nascimento = models.DateField(max_length=8, null=False, default=None)
+    data_nascimento = models.DateField()
     last_login = models.DateTimeField(null=True, blank=True)
 
     objects = UsuarioManager()
@@ -48,7 +47,19 @@ class usuario(AbstractBaseUser):
     def __str__(self):
         return self.nome  
 
-    def save(self, *args, **kwargs):
-        if not self.UUID:
-             self.UUID = Binary(uuid.uuid4().bytes)
-        super().save(*args, **kwargs)
+class projeto(models.Model):
+    titulo = models.CharField(max_length=255)
+    descricao = models.TextField()
+    user_id = models.CharField(max_length=36)  
+    meta_investidor = models.DecimalField(max_digits=10, decimal_places=2)  
+    total_investidor = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
+    data_criacao = models.DateTimeField(auto_now_add=True)  
+
+    def __str__(self):
+        return self.titulo
+
+    @property
+    def percentual_projeto(self):
+        if self.meta_investidor > 0:
+            return (self.total_investidor / self.meta_investidor) * 100
+        return 0
