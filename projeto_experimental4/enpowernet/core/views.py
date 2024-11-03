@@ -6,6 +6,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from datetime import date
 from django.utils import timezone
+from .services import user_service
 from core.forms import cadastro_forms
 import uuid
 from django.contrib.sessions.models import Session
@@ -55,9 +56,22 @@ def logout(request):
 def home(request):
     return render(request, 'home/home.html', {'user': request.user})
 
+@login_required
 def perfil(request):
-    user = request.user
-    return render(request, 'index/perfil.html', {'user': user})
+    
+    usuario = request.user
+    nome_formatado = user_service.formata_nome(request.user.nome)
+    numero_formatado = user_service.formata_numero(request.user.telefone)
+    projetos = projeto.objects.filter(user_id=usuario)
+
+    context = {
+        'nome': nome_formatado,
+        'numero': numero_formatado,
+        'email': request.user.email,
+        'projetos': projetos,
+    }
+ 
+    return render(request, 'index/perfil.html', context)
 
 @login_required
 def criar_projeto(request):

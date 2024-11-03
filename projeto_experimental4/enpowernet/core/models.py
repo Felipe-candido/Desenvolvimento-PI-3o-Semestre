@@ -1,6 +1,7 @@
 import uuid
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+from django.contrib.auth import get_user_model
 from dateutil.relativedelta import relativedelta
 from datetime import date
 
@@ -54,6 +55,7 @@ class projeto(models.Model):
     meta_investidor = models.DecimalField(max_digits=10, decimal_places=2)  
     total_investidor = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
     data_criacao = models.DateTimeField(auto_now_add=True)  
+    user_id = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     def __str__(self):
         return self.titulo
