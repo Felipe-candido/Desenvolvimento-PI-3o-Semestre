@@ -1,4 +1,4 @@
-def construir_nome_exibicao(nome_usuario):
+def formata_nome(nome_usuario):
     nome = nome_usuario.split(' ')
     
     if len(nome) == 1:
@@ -8,7 +8,7 @@ def construir_nome_exibicao(nome_usuario):
 
     return nome_exibicao
 
-def construir_numero_telefone(numero_usuario):
+def formata_numero(numero_usuario):
     numero_usuario = ''.join(filter(str.isdigit, numero_usuario))
     
     if len(numero_usuario) not in (10, 11):
