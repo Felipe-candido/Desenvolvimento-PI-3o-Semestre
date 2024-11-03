@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-sidebar">
-                            <div class="d-flex justify-content-center mb-3">
+                            <div class="d-flex justify-content-center">
                                 <img src="{% static 'perfil/imagens/sem_perfil.png' %}" alt="Foto do Usuário" class="profile-img">
                             </div>
                             <h3 class="text-center">{{ nome_exibicao }}</h3>
@@ -29,7 +29,11 @@
                                 Descrição breve sobre o empreendedor, suas habilidades e experiência profissional. Aqui é possível
                                 descrever o que o empreendedor faz e seus interesses no setor.
                             </p>
-                            <a href="#" class="btn btn-primary btn-edit w-100">Editar Perfil</a>
+                            <div class="d-flex justify-content-center mb-3">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar_perfil">
+                                    Editar perfil
+                                </button>
+                            </div> 
                         </div>
                     </div>
 
@@ -59,6 +63,36 @@
                 </div>
             </div>
         </div>
+
+
+        {% comment %} EDIÇÃO DAS INFORMAÇÕES DO USUARIO {% endcomment %}
+        <div class="modal fade" id="editar_perfil" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-center">
+                        <h5 class="modal-title" id="TituloModalCentralizado">Alterar informações</h5> 
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" class="form-control" id="nome" value="{{ nome }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" class="form-control" id="telefone" value="{{ numero }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="sobre">Sobre</label>
+                            <input type="text" class="form-control" id="sobre" placeholder="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Salvar mudanças</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     {% else %}
     <p>Você precisa estar logado para ver esta página.</p>
     {% endif %}
