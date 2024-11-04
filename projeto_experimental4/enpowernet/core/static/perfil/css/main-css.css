@@ -69,4 +69,23 @@ body{
     margin-top: 10px;
 }
 
+.form-section {
+    padding: 2rem 2rem;
+    text-align: center;
+    margin-top: 15px;
+}
+
+
+.btn-edit {
+    width: 100%;
+    background-color: #004080;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 0.6rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
 

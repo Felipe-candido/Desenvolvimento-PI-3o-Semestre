@@ -26,8 +26,7 @@
                             <hr>
                             <h5>Sobre</h5>
                             <p class="text-muted">
-                                Descrição breve sobre o empreendedor, suas habilidades e experiência profissional. Aqui é possível
-                                descrever o que o empreendedor faz e seus interesses no setor.
+                                {{ sobre }}
                             </p>
                             <div class="d-flex justify-content-center mb-3">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar_perfil">
@@ -73,22 +72,29 @@
                         <h5 class="modal-title" id="TituloModalCentralizado">Alterar informações</h5> 
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nome">Nome</label>
-                            <input type="text" class="form-control" id="nome" value="{{ nome }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="telefone">Telefone</label>
-                            <input type="tel" class="form-control" id="telefone" value="{{ numero }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="sobre">Sobre</label>
-                            <input type="text" class="form-control" id="sobre" placeholder="">
+                        <div class="form-section">
+                            <form method="POST" action="{% url 'editar_usuario' %}">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                    <div style="margin-bottom: 20px;">
+                                        {{ field.label_tag }}
+                                        {{ field }}
+                                        {% if field.errors %}
+                                            <div class="text-danger">
+                                                {% for error in field.errors %}
+                                                <p>{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                        </div>
+                                {% endfor %}
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn-edit" value="Salvar mudanças">
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Salvar mudanças</button>
-                    </div>
+                    
                 </div>
             </div>
         </div>

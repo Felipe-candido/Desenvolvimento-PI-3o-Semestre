@@ -51,7 +51,7 @@ body{
 .form-section {
     padding: 2rem 2rem;
     text-align: center;
-    margin: 0; /* Remover margem extra */
+    margin: 0;
 }
 
 .form-section h3 {

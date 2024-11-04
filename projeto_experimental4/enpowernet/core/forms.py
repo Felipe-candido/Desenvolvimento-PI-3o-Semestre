@@ -78,4 +78,51 @@ class cadastro_forms(forms.ModelForm):
         user.set_password(self.cleaned_data['senha'])
         if commit:
             user.save()
-        return user        
+        return user     
+    
+    
+    
+
+class editar_perfil_forms(forms.ModelForm): 
+    class Meta:
+        model = usuario
+        fields = ["nome", "telefone", "sobre"]
+        labels = {
+            'nome': 'Nome Completo',
+            'telefone': 'Telefone de Contato',
+            'sobre': 'Sobre Você',
+        }
+        widgets = {
+            'nome': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Nome',
+                'required': 'required',
+            }),
+            'telefone': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Telefone',
+                'required': 'required',
+            }),
+            'sobre': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'sobre',
+            }),
+        }
+        
+        
+        def save(self, commit=True):
+            user = super().save(commit=False)
+            user.set_password(self.cleaned_data['senha'])
+            if commit:
+                user.save()
+            return user
+        
+        
+        def clean_telefone(self):
+            telefone = self.cleaned_data['telefone']
+            if telefone.isnumeric():
+                if len(telefone) == 11:
+                    return telefone
+                raise ValidationError('Telefone inválido, verifique a quantidade de digitos e coloque apenas numeros (lembrem-se de colocar o ddd)')
+            raise ValidationError('Telefone inválido, verifique a quantidade de digitos e coloque apenas numeros (lembrem-se de colocar o ddd)')
+ 

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 from . import views
-from .views import  realizar_login, logout, add_usuario2, perfil
+from .views import  realizar_login, logout, add_usuario2, perfil, editar_usuario
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -9,4 +9,5 @@ urlpatterns = [
     path('login/', realizar_login, name='realizar_login'),
     path("logout/", logout, name="logout"),
     path("perfil/", perfil, name="perfil"),
+    path("perfil/", editar_usuario, name="editar_usuario"),
 ]

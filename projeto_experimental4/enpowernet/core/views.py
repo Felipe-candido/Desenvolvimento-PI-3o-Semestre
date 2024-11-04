@@ -7,7 +7,7 @@ from django.contrib import messages
 from datetime import date
 from django.utils import timezone
 from .services import user_service
-from core.forms import cadastro_forms
+from core.forms import cadastro_forms, editar_perfil_forms
 import uuid
 from django.contrib.sessions.models import Session
 
@@ -20,7 +20,6 @@ def add_usuario2(request):
             user.UUID = str(uuid.uuid4())  # Gepeteco decidiu isso, se der errado me avisa
             user.set_password(form.cleaned_data['senha'])
             user.save()
-            
             messages.success(request, "Usuário registrado com sucesso!")
             return redirect('/')
         
@@ -63,12 +62,15 @@ def perfil(request):
     nome_formatado = user_service.formata_nome(request.user.nome)
     numero_formatado = user_service.formata_numero(request.user.telefone)
     projetos = projeto.objects.filter(user_id=usuario)
+    form = editar_perfil_forms(instance=request.user)
 
     context = {
         'nome': nome_formatado,
         'numero': numero_formatado,
         'email': request.user.email,
+        'sobre':request.user.sobre,
         'projetos': projetos,
+        'form': form,
     }
  
     return render(request, 'index/perfil.html', context)
@@ -97,3 +99,21 @@ def criar_projeto(request):
 def buscar_projetos(request):
     project = projeto.objects.filter(user_id=request.user.UUID)
     return render(request, 'index/projetos.html', {'projetos': project})
+
+
+@login_required
+def editar_usuario(request):
+    if request.method == "POST":
+        user = request.user
+        form = editar_perfil_forms(request.POST, instance=user)
+        
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, "Informações alteradas com sucesso!")
+            return redirect('perfil/')
+        
+    form = editar_perfil_forms(instance=user)
+    context = {'form': form}
+    return render(request, 'index/perfil.html', context)
+        
+        
