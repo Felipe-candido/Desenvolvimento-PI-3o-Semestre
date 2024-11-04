@@ -91,7 +91,7 @@ def criar_projeto(request):
 
         project.save()
         messages.success(request, "Projeto foi criado")
-        return redirect("perfil/")
+        return redirect("perfil")
 
     return render(request, 'index/perfil.html')
 
@@ -110,7 +110,7 @@ def editar_usuario(request):
         if form.is_valid():
             user = form.save()
             messages.success(request, "Informações alteradas com sucesso!")
-            return redirect('perfil/')
+            return redirect('perfil')
         
     form = editar_perfil_forms(instance=user)
     context = {'form': form}
