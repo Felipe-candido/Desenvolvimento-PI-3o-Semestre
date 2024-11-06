@@ -82,6 +82,7 @@ def criar_projeto(request):
         description = request.POST.get("descricao")
         meta = request.POST.get("meta_investidor")
 
+    
         project = projeto(
             titulo=title,
             descricao=description,
@@ -90,14 +91,14 @@ def criar_projeto(request):
         )
 
         project.save()
-        messages.success(request, "Projeto foi criado")
-        return redirect("perfil")
+        messages.success(request, "Projeto foi criado com sucesso!")
+        return redirect("perfil")  
 
-    return render(request, 'index/perfil.html')
+    return render(request, 'index/criar_projeto.html')  
 
 @login_required
 def buscar_projetos(request):
-    project = projeto.objects.filter(user_id=request.user.UUID)
+    project = projeto.objects.all()
     return render(request, 'index/projetos.html', {'projetos': project})
 
 
