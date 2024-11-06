@@ -1,0 +1,31 @@
+{% extends 'base.html' %}  
+{% load static %}
+
+{% block title %}Criar Novo Projeto{% endblock %}
+
+{% block conteudo %}
+    <div class="container mt-5">
+        <h2 class="text-light">Criar Novo Projeto</h2>
+
+       
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="titulo" class="form-label text-light">Título do Projeto</label>
+                <input type="text" class="form-control" id="titulo" name="titulo" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="descricao" class="form-label text-light">Descrição do Projeto</label>
+                <textarea class="form-control" id="descricao" name="descricao" rows="4" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="meta_investidor" class="form-label text-light">Meta do Investidor</label>
+                <input type="number" class="form-control" id="meta_investidor" name="meta_investidor" step="0.01" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Criar Projeto</button>
+        </form>
+    </div>
+{% endblock %}

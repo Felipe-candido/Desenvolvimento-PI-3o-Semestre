@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from dateutil.relativedelta import relativedelta
 from datetime import date
+from decimal import Decimal
+from bson import Decimal128
 
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -56,13 +58,25 @@ class projeto(models.Model):
     meta_investidor = models.DecimalField(max_digits=10, decimal_places=2)  
     total_investidor = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
     data_criacao = models.DateTimeField(auto_now_add=True)  
-    user_id = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-
     def __str__(self):
         return self.titulo
 
     @property
     def percentual_projeto(self):
-        if self.meta_investidor > 0:
-            return (self.total_investidor / self.meta_investidor) * 100
-        return 0
+        if self.meta_investidor:  
+            
+            if isinstance(self.meta_investidor, Decimal128):
+                meta_investimento = self.meta_investidor.to_decimal() 
+            else:
+                meta_investimento = self.meta_investidor  
+
+            # conversão, favor não remover felipe ou gabriel kkkkkkkk banco não retorna barra sem isso
+            if isinstance(self.total_investidor, Decimal128):
+                total_investido = self.total_investidor.to_decimal()  
+            else:
+                total_investido = self.total_investidor  
+
+            if meta_investimento > 0:  
+                percentual = (total_investido / meta_investimento) * 100
+                return round(percentual, 2) 
+        return 0  
