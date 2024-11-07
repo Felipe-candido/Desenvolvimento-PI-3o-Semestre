@@ -35,7 +35,9 @@ class usuario(AbstractBaseUser):
     telefone = models.CharField(max_length=11)
     data_nascimento = models.DateField()
     last_login = models.DateTimeField(null=True, blank=True)
-    sobre = models.CharField(null=True, max_length=500)
+    sobre = models.CharField(blank=True, null=True, max_length=500)
+    cidade = models.CharField(max_length=255)
+    estado = models.CharField(max_length=2)
 
     objects = UsuarioManager()
 

@@ -17,16 +17,16 @@
                             <div class="d-flex justify-content-center">
                                 <img src="{% static 'perfil/imagens/sem_perfil.png' %}" alt="Foto do Usuário" class="profile-img">
                             </div>
-                            <h3 class="text-center">{{ nome_exibicao }}</h3>
-                            <p class="text-muted text-center">{{nome}}</p>
+                            <h3 class="text-center">{{ nome }}</h3>
                             <hr>
                             <h5>Informações de Contato</h5>
-                            <p class="text-muted"><strong>Email:</strong> {{ email }}</p>
+                            <p class="text-muted"><strong>Email:</strong> {{ usuario.email }}</p>
                             <p class="text-muted"><strong>Telefone:</strong> {{ numero }}</p>
+                            <p class="text-muted"><strong>Cidade:</strong> {{ usuario.cidade }}/{{ usuario.estado }} </p>
                             <hr>
                             <h5>Sobre</h5>
                             <p class="text-muted">
-                                {{ sobre }}
+                                {{ usuario.sobre }}
                             </p>
                             <div class="d-flex justify-content-center mb-3">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar_perfil">
@@ -42,13 +42,22 @@
 
                         <!-- Card de Projeto -->
                          {% for projeto in projetos %}
-                            <div class="card project-card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{projeto.titulo}}</h5>
-                                    <p class="card-text text-muted">{{projeto.descricao}}</p>
-                                    <a href="#" class="btn btn-warning">Ver Detalhes</a>
-                                </div>
+                         <div class="project-card">
+                            <img src="https://via.placeholder.com/50" alt="Projeto Logo" class="float-start me-3">
+                            <div class="titulo-card">
+                                <h5>{{ projeto.titulo }}</h5>
                             </div>
+                            <div class="conteudo-card">
+                                <h6>{{ projeto.descricao}}</h6>
+                            </div>
+                            <p>{{ projeto.percentual_projeto }}</p>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: {% if projeto.percentual_projeto > 100 %} 100% {% else %} {{ projeto.percentual_projeto }}% {% endif %};
+                                background-color: {% if projeto.percentual_projeto >= 100 %} green {% elif projeto.percentual_projeto >= 50 %} yellow {% else %} red {% endif %};
+                                height: 100%; border-radius: 10px;"></div>
+                            </div>
+                            <a href="#" class="text-primary">Meta: </a>
+                        </div>
                         {% empty %}
                             <div class="card project-card mb-3">
                                 <div class="card-body">

@@ -21,29 +21,39 @@ class cadastro_forms(forms.ModelForm):
     
     class Meta:
         model = usuario
-        fields = ["email", "nome", "genero", "telefone", "data_nascimento", "senha"]
+        fields = ["email", "nome", "genero", "telefone", "data_nascimento", "senha", "cidade", "estado"]
         widgets = {
             'data_nascimento': forms.DateInput(attrs={
                 'type': 'date',
                 'class': 'form-control',
                 'placeholder': 'Nome',
                 'required': 'required',
-            }),
+                }),
             'nome': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Nome',
                 'required': 'required',
-            }),
+                }),
             'email': forms.EmailInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Email',
                 'required': 'required',
-            }),
+                }),
             'telefone': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Telefone',
                 'required': 'required',
-            }),
+                }),
+            'cidade': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Cidade',
+                'required': 'required',
+                }),
+            'estado': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Estado',
+                'required': 'required',
+                }),
         }
         
     def clean_email(self):
@@ -63,6 +73,7 @@ class cadastro_forms(forms.ModelForm):
                 return telefone
             raise ValidationError('Telefone inválido, verifique a quantidade de digitos e coloque apenas numeros (lembrem-se de colocar o ddd)')
         raise ValidationError('Telefone inválido, verifique a quantidade de digitos e coloque apenas numeros (lembrem-se de colocar o ddd)')
+    
         
         
     def clean_data_nascimento(self):
@@ -86,7 +97,7 @@ class cadastro_forms(forms.ModelForm):
 class editar_perfil_forms(forms.ModelForm): 
     class Meta:
         model = usuario
-        fields = ["nome", "telefone", "sobre"]
+        fields = ["nome", "telefone", "sobre", "cidade", "estado"]
         labels = {
             'nome': 'Nome Completo',
             'telefone': 'Telefone de Contato',
@@ -106,6 +117,16 @@ class editar_perfil_forms(forms.ModelForm):
             'sobre': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'sobre',
+            }),
+            'cidade': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Cidade',
+                'required': 'required',
+            }),
+            'estado': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Estado',
+                'required': 'required',
             }),
         }
         

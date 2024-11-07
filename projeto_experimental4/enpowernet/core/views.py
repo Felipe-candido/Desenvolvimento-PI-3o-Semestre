@@ -61,16 +61,17 @@ def perfil(request):
     usuario = request.user
     nome_formatado = user_service.formata_nome(request.user.nome)
     numero_formatado = user_service.formata_numero(request.user.telefone)
-    projetos = projeto.objects.filter(user_id=usuario)
+    projetos = projeto.objects.filter(user_id=request.user.UUID)
     form = editar_perfil_forms(instance=request.user)
+    
+    
 
     context = {
         'nome': nome_formatado,
         'numero': numero_formatado,
-        'email': request.user.email,
-        'sobre':request.user.sobre,
         'projetos': projetos,
         'form': form,
+        'usuario': usuario,
     }
  
     return render(request, 'index/perfil.html', context)
@@ -96,10 +97,10 @@ def criar_projeto(request):
 
     return render(request, 'index/criar_projeto.html')  
 
-@login_required
-def buscar_projetos(request):
-    project = projeto.objects.all()
-    return render(request, 'index/projetos.html', {'projetos': project})
+# @login_required
+# def buscar_projetos(request):
+#     project = projeto.objects.all()
+#     return render(request, 'index/projetos.html', {'projetos': project})
 
 
 @login_required
@@ -116,5 +117,16 @@ def editar_usuario(request):
     form = editar_perfil_forms(instance=user)
     context = {'form': form}
     return render(request, 'index/perfil.html', context)
+
+
+
+def index(request):
+    usuario = request.user
+    project = projeto.objects.all()
+    context = {
+        "projetos": project,
+        "usuario": usuario
+    }
+    return render(request, 'index/index.html', context)
         
         
