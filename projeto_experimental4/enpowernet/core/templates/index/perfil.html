@@ -61,7 +61,7 @@
                             {% elif projeto.percentual_projeto >= 75.00 %}
                                 <p style="Color: #0cad00; font-weight: 700;"> {{ projeto.percentual_projeto }} </p>
                             {% endif %}
-
+                            <p style="color: black;">Aqui tem um super teste olha:{{projeto.id_mongo}}</p>
                             <div class="progress">
                                 <div class="progress-bar" style="width: {% if projeto.percentual_projeto > 100 %} 100% {% else %} {{ projeto.percentual_projeto }}% {% endif %};
                                 background-color: {% if projeto.percentual_projeto >= 75 %} green {% elif projeto.percentual_projeto >= 50 and projeto.percentual_projeto < 75.00 %} yellow {% else %} red {% endif %};
@@ -74,7 +74,7 @@
                                 <div class="col-md-3">
                                     <div class="d-flex d-flex justify-content-evenly flex-row-reverse bd-highlight">
                                         <button class="btn btn-warning">Detalhe</button>
-                                        <button class="btn btn-danger">Excluir</button>
+                                        <a href="{% url 'excluir_projeto' projeto.id_mongo %}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este projeto?')">Excluir</a>
                                     </div>
                                 </div>
                             </div>

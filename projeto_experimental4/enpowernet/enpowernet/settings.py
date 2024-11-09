@@ -74,6 +74,8 @@ WSGI_APPLICATION = 'enpowernet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+MONGO_URI = 'mongodb://localhost:27017/enpowernet'
+
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
