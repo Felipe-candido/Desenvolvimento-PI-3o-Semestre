@@ -4,7 +4,7 @@
 {% block title %}Projetos{% endblock %}
 
 {% block css_extra %}
-<link rel="stylesheet" href="{% static 'index/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/index.css' %}">
 {% endblock %}
 
 {% block conteudo %}
@@ -15,29 +15,45 @@
                     <div class="profile-card">
                         <img src="https://via.placeholder.com/100" alt="Profile Image" class="profile-img mb-3">
                         <h5>{{ usuario.nome }}</h5>
-                        <p>Araras, São Paulo</p>
+                        <p>{{ usuario.cidade }},{{ usuario.estado }}</p>
                         <p>{{ usuario.sobre}}</p>
                     </div>
                 </div>
                 
                 <div class="col-md-6">
                     {% for projeto in projetos %}
-                    <div class="project-card">
-                        <img src="https://via.placeholder.com/50" alt="Projeto Logo" class="float-start me-3">
-                        <div class="titulo-card">
-                            <h5>{{ projeto.titulo }}</h5>
+                         <div class="project-card">
+                            <img src="https://via.placeholder.com/50" alt="Projeto Logo" class="float-start me-3">
+                            <div class="titulo-card">
+                                <h5>{{ projeto.titulo }}</h5>
+                            </div>
+                            <div class="conteudo-card">
+                                <h6>{{ projeto.descricao}}</h6>
+                            </div>
+                            {% if projeto.percentual_projeto < 50.00 %}
+                                <p style="Color: #fc030b; font-weight: 700;"> {{ projeto.percentual_projeto }} </p>
+                            {% elif projeto.percentual_projeto >= 50.00 and projeto.percentual_projeto < 75.00 %}
+                                <p style="Color: #f0a502; font-weight: 700;"> {{ projeto.percentual_projeto }} </p>
+                            {% elif projeto.percentual_projeto >= 75.00 %}
+                                <p style="Color: #0cad00; font-weight: 700;"> {{ projeto.percentual_projeto }} </p>
+                            {% endif %}
+
+                            <div class="progress">
+                                <div class="progress-bar" style="width: {% if projeto.percentual_projeto > 100 %} 100% {% else %} {{ projeto.percentual_projeto }}% {% endif %};
+                                background-color: {% if projeto.percentual_projeto >= 75 %} green {% elif projeto.percentual_projeto >= 50 and projeto.percentual_projeto < 75.00 %} yellow {% else %} red {% endif %};
+                                height: 100%; border-radius: 10px;"></div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-11">
+                                    <p class="font-weight-bold" style="color: #034994; font-weight: 700;">Meta: {{ projeto.total_investidor }}/{{ projeto.meta_investidor }}</p>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="d-flex d-flex justify-content-evenly flex-row-reverse bd-highlight">
+                                        <button class="btn btn-warning">Detalhe</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="conteudo-card">
-                            <h6>{{ projeto.descricao}}</h6>
-                        </div>
-                        <p>{{ projeto.percentual_projeto }}</p>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: {% if projeto.percentual_projeto > 100 %} 100% {% else %} {{ projeto.percentual_projeto }}% {% endif %};
-                            background-color: {% if projeto.percentual_projeto >= 100 %} green {% elif projeto.percentual_projeto >= 50 %} yellow {% else %} red {% endif %};
-                            height: 100%; border-radius: 10px;"></div>
-                        </div>
-                        <a href="#" class="text-primary">Meta: </a>
-                    </div>
 
 
                     {% empty %}
@@ -82,7 +98,6 @@
             </div>
         </div>
         {% endif %}
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}
 
 

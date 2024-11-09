@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from bson import ObjectId
 from django.http import HttpResponse, JsonResponse
 from .models import usuario, projeto
 from django.contrib.auth.decorators import login_required
@@ -10,6 +11,9 @@ from .services import user_service
 from core.forms import cadastro_forms, editar_perfil_forms
 import uuid
 from django.contrib.sessions.models import Session
+from enpowernet.settings import MONGO_URI  
+from pymongo import MongoClient
+from bson import ObjectId  
 
 def add_usuario2(request):                 
     if request.method == 'POST':
@@ -64,8 +68,6 @@ def perfil(request):
     projetos = projeto.objects.filter(user_id=request.user.UUID)
     form = editar_perfil_forms(instance=request.user)
     
-    
-
     context = {
         'nome': nome_formatado,
         'numero': numero_formatado,
@@ -97,6 +99,18 @@ def criar_projeto(request):
 
     return render(request, 'index/criar_projeto.html')  
 
+@login_required
+def excluir_projeto(request, projeto_id):
+    print(f"Buscando projeto com id_mongo={projeto_id}")
+    projeto_obj = projeto.objects.filter(id_mongo=projeto_id).first()
+    if projeto_obj:
+        projeto_obj.delete()
+        print("Projeto excluído")
+    else:
+        print("Projeto não encontrado")
+    return redirect('perfil')
+
+
 # @login_required
 # def buscar_projetos(request):
 #     project = projeto.objects.all()
@@ -118,8 +132,6 @@ def editar_usuario(request):
     context = {'form': form}
     return render(request, 'index/perfil.html', context)
 
-
-
 def index(request):
     usuario = request.user
     project = projeto.objects.all()
@@ -128,5 +140,6 @@ def index(request):
         "usuario": usuario
     }
     return render(request, 'index/index.html', context)
-        
+
+
         
