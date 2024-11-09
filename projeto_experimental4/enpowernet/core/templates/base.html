@@ -30,9 +30,16 @@
 
                 <div class="text-end">
                     {% if user.is_authenticated %}
-                        <span class="navbar-text text-light me-2">{{ user.nome }}</span>
-                        <button type="button" class="btn btn-warning" onclick="window.location.href='{% url 'perfil' %}'">Perfil</button>
-                        <button type="button" class="btn btn-outline-light" onclick="window.location.href='{% url 'logout' %}'">Logout</button>
+                        <div class="btn-group">
+                            <div type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{% static 'perfil/imagens/sem_perfil.png' %}" width="38" height="38" alt="..." class="rounded-circle"></div>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><button class="dropdown-item" type="button" onclick="window.location.href='{% url 'perfil' %}'">Perfil</button></li>
+                                <li><button class="dropdown-item" type="button" onclick="window.location.href='{% url 'logout' %}'">Logout</button>
+                            </ul>
+                        </div>
+                        {% comment %} <a class="navbar-text text-light me-2" href="{% url 'perfil' %}">{{ user.nome }}</a> {% endcomment %}
+                        {% comment %} <button type="button" class="btn btn-warning" onclick="window.location.href='{% url 'perfil' %}'">Perfil</button> {% endcomment %}
+                        {% comment %} <button type="button" class="btn btn-outline-light" onclick="window.location.href='{% url 'logout' %}'">Logout</button> {% endcomment %}
                     {% else %}
                         <button type="button" class="btn btn-outline-light me-2" onclick="window.location.href='{% url 'realizar_login' %}'">Login</button>
                         <button type="button" class="btn btn-warning" onclick="window.location.href='{% url 'add_usuario2' %}'">Sign-up</button>
