@@ -8,7 +8,7 @@ from django.contrib import messages
 from datetime import date
 from django.utils import timezone
 from .services import user_service
-from core.forms import cadastro_forms, editar_perfil_forms
+from core.forms import cadastro_forms, editar_perfil_forms, projeto_forms
 import uuid
 from django.contrib.sessions.models import Session
 from enpowernet.settings import MONGO_URI  
@@ -21,7 +21,7 @@ def add_usuario2(request):
         
         if form.is_valid():
             user = form.save(commit=False)
-            user.UUID = str(uuid.uuid4())  # Gepeteco decidiu isso, se der errado me avisa
+            user.UUID = str(uuid.uuid4()) 
             user.set_password(form.cleaned_data['senha'])
             user.save()
             messages.success(request, "Usuário registrado com sucesso!")
@@ -81,23 +81,20 @@ def perfil(request):
 @login_required
 def criar_projeto(request):
     if request.method == "POST":
-        title = request.POST.get("titulo")
-        description = request.POST.get("descricao")
-        meta = request.POST.get("meta_investidor")
+        
+        project = projeto(user_id=request.user.UUID)
+        form = projeto_forms(request.POST, instance=project)
+        
+        if form.is_valid():
+            project = form.save()
+            messages.success(request, "Projeto criado com sucesso!")
+            return redirect('perfil')
 
-    
-        project = projeto(
-            titulo=title,
-            descricao=description,
-            user_id=request.user.UUID,
-            meta_investidor=meta
-        )
-
-        project.save()
-        messages.success(request, "Projeto foi criado com sucesso!")
-        return redirect("perfil")  
-
-    return render(request, 'index/criar_projeto.html')  
+    project = projeto(user_id=request.user.UUID,)
+    form = projeto_forms(instance=project)
+    context = {'form': form}
+    return render(request, 'index/criar_projeto.html', context)  
+  
 
 @login_required
 def excluir_projeto(request, projeto_id):

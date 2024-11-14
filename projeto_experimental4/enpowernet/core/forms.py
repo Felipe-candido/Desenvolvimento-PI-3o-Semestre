@@ -1,6 +1,6 @@
 from unicodedata import numeric
 from django import forms 
-from .models import usuario
+from .models import usuario, projeto
 from django.core.exceptions import ValidationError
 from datetime import date
 
@@ -146,4 +146,42 @@ class editar_perfil_forms(forms.ModelForm):
                     return telefone
                 raise ValidationError('Telefone inválido, verifique a quantidade de digitos e coloque apenas numeros (lembrem-se de colocar o ddd)')
             raise ValidationError('Telefone inválido, verifique a quantidade de digitos e coloque apenas numeros (lembrem-se de colocar o ddd)')
+ 
+ 
+ 
+    
+class projeto_forms(forms.ModelForm):
+     
+    class Meta:
+        model = projeto
+        fields = ("titulo", "descricao", "meta_investidor")
+        labels = {
+            'titulo': 'Nome do projeto',
+            'descrição': 'Sobre o projeto',
+            'meta_investidor': 'Meta de investimento',
+        }
+        widgets = {
+            'titulo': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Titulo do projeto',
+                'required': 'required',
+            }),
+            'descricao': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Descrição do projeto',
+                'required': 'required',
+            }),
+            'meta_investidor': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Meta de investimento',
+                'step': '0.01',
+            }),
+        }
+        
+        def save(self, commit=True):
+            projeto1 = super().save(commit=False)
+            if commit:
+                projeto1.save()
+            return projeto1
+            
  

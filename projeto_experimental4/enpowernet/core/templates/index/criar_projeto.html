@@ -3,33 +3,62 @@
 
 {% block title %}Criar Novo Projeto{% endblock %}
 {% block css_extra %}
-<link rel="stylesheet" href="{% static 'home/css/main-css.css' %}">
+<link rel="stylesheet" href="{% static 'criar_projeto/css/main-css.css' %}">
 {% endblock %}
 
 
 {% block conteudo %}
-    <div class="container mt-5">
-        <h2 class="text-light">Criar Novo Projeto</h2>
 
-       
-        <form method="POST">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="titulo" class="form-label text-light">Título do Projeto</label>
-                <input type="text" class="form-control" id="titulo" name="titulo" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="descricao" class="form-label text-light">Descrição do Projeto</label>
-                <textarea class="form-control" id="descricao" name="descricao" rows="4" required></textarea>
-            </div>
-
-            <div class="mb-3">
-                <label for="meta_investidor" class="form-label text-light">Meta do Investidor</label>
-                <input type="number" class="form-control" id="meta_investidor" name="meta_investidor" step="0.01" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Criar Projeto</button>
-        </form>
+<div class="container projeto">
+    <h2 class="text-center mb-4">Criar Novo Projeto</h2>
+    <div class="card shadow">
+        <div class="card-body">
+            <form method="POST" action="{% url 'criar_projeto' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="titulo" class="form-label">Nome do Projeto</label>
+                    {{ form.titulo}}
+                </div>
+                <div class="form-group">
+                    <label for="descricao" class="form-label form1">Descrição do Projeto</label>
+                    {{ form.descricao }}
+                </div>
+                <div class="form-group">
+                    <label for="metaInvestimento" class="form-label form1">Meta de Investimento (R$)</label>
+                    {{ form.meta_investidor}}
+                </div>
+                <button type="submit" class="btn submit-btn btn-block">Criar Projeto</button>
+            </form>
+        </div>
     </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    document.getElementById("projectForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        // Coletando os valores do formulário
+        const titulo = document.getElementById("titulo").value;
+        const descricao = document.getElementById("descricao").value;
+        const metaInvestimento = parseFloat(document.getElementById("metaInvestimento").value);
+        
+        // Validação simples para garantir que a meta é positiva
+        if (metaInvestimento <= 0) {
+            alert("A meta de investimento deve ser um valor positivo.");
+            return;
+        }
+        
+        // Exibir os dados para o usuário (simulando a criação do projeto)
+        alert(`Projeto criado com sucesso!\n\nTítulo: ${titulo}\nDescrição: ${descricao}\nMeta de Investimento: R$ ${metaInvestimento.toFixed(2)}`);
+        
+        // Limpar o formulário após a criação do projeto
+        document.getElementById("projectForm").reset();
+    });
+</script>
+</body>
+</html>
 {% endblock %}
