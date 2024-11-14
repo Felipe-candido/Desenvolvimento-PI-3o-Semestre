@@ -67,17 +67,16 @@ class projeto(models.Model):
     def __str__(self):
         return self.titulo
 
+
     @property
     def percentual_projeto(self):
+        # Lembra que a conversão é necessária pra isso funcionar 
         if self.meta_investidor:  
-            
             if isinstance(self.meta_investidor, Decimal128):
-                meta_investimento = self.meta_investidor.to_decimal() 
+                meta_investimento = self.meta_investidor.to_decimal()  
             else:
                 meta_investimento = self.meta_investidor  
 
-            # conversão, favor não remover felipe ou gabriel kkkkkkkk banco não retorna barra sem isso
-            # Vou excluir >:)
             if isinstance(self.total_investidor, Decimal128):
                 total_investido = self.total_investidor.to_decimal()  
             else:
@@ -89,6 +88,18 @@ class projeto(models.Model):
         return 0  
     
     def save(self, *args, **kwargs):
+       
+        if isinstance(self.meta_investidor, Decimal128):
+            self.meta_investidor = self.meta_investidor.to_decimal()
+        
+        if isinstance(self.total_investidor, Decimal128):
+            self.total_investidor = self.total_investidor.to_decimal()
+
+        # tive muitos problemas com o mongoID
+        # aparentemente essa chave que vocês criaram não tava sendo gerada as vezes
+        # Essa função garante que essa merda vai ser criada na força do ódio
         if not self.id_mongo:
             self.id_mongo = str(ObjectId()) 
+        
+        
         super().save(*args, **kwargs)

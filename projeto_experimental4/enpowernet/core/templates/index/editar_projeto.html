@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Editar Projeto{% endblock %}
+
+{% block css_extra %}
+<link rel="stylesheet" href="{% static 'home/css/main-css.css' %}">
+{% endblock %}
+
+{% block conteudo %}
+    <div class="container mt-5">
+        <h2 class="text-light">Editar Projeto</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Campo para o título do projeto -->
+            <div class="mb-3">
+                <label for="titulo" class="form-label text-light">Título do Projeto</label>
+                {{ form.titulo }}
+            </div>
+
+            <!-- Campo para a descrição do projeto -->
+            <div class="mb-3">
+                <label for="descricao" class="form-label text-light">Descrição do Projeto</label>
+                {{ form.descricao }}
+            </div>
+
+            <!-- Campo para a meta do investidor (numérico) -->
+            <div class="mb-3">
+                <label for="meta_investidor" class="form-label text-light">Meta do Investidor</label>
+                {{ form.meta_investidor }}
+            </div>
+
+            <!-- Botão para salvar as mudanças -->
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        </form>
+    </div>
+{% endblock %}

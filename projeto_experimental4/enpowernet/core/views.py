@@ -7,13 +7,14 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from datetime import date
 from django.utils import timezone
+from decimal import Decimal, InvalidOperation
 from .services import user_service
-from core.forms import cadastro_forms, editar_perfil_forms
+from core.forms import cadastro_forms, editar_perfil_forms, editar_projeto_forms
 import uuid
 from django.contrib.sessions.models import Session
 from enpowernet.settings import MONGO_URI  
 from pymongo import MongoClient
-from bson import ObjectId  
+from bson import ObjectId, Decimal128 
 
 def add_usuario2(request):                 
     if request.method == 'POST':
@@ -131,6 +132,37 @@ def editar_usuario(request):
     form = editar_perfil_forms(instance=user)
     context = {'form': form}
     return render(request, 'index/perfil.html', context)
+
+@login_required
+def editar_projeto(request, projeto_id):
+   
+    projeto_obj = projeto.objects.filter(id_mongo=projeto_id, user_id=request.user.UUID).first()
+
+    if not projeto_obj:
+        messages.error(request, "Projeto não encontrado ou você não tem permissão para editá-lo.")
+        return redirect('perfil')
+
+    if request.method == 'POST':
+        form = editar_projeto_forms(request.POST, instance=projeto_obj)
+
+        if form.is_valid():
+            
+            form.save()
+            messages.success(request, "Projeto atualizado com sucesso!")
+            return redirect('perfil') 
+        else:
+            
+            messages.error(request, "Houve um erro ao atualizar o projeto. Verifique os dados.")
+    else:
+       
+        form = editar_projeto_forms(instance=projeto_obj)
+
+   
+    context = {
+        'form': form,
+        'projeto': projeto_obj
+    }
+    return render(request, 'index/editar_projeto.html', context)
 
 def index(request):
     usuario = request.user

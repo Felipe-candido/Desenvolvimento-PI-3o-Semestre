@@ -1,8 +1,12 @@
 from unicodedata import numeric
 from django import forms 
-from .models import usuario
+from .models import usuario, projeto
 from django.core.exceptions import ValidationError
 from datetime import date
+from bson import Decimal128, ObjectId
+from decimal import Decimal, InvalidOperation
+
+
 
 class cadastro_forms(forms.ModelForm):
     genero = forms.ChoiceField(
@@ -146,4 +150,31 @@ class editar_perfil_forms(forms.ModelForm):
                     return telefone
                 raise ValidationError('Telefone inválido, verifique a quantidade de digitos e coloque apenas numeros (lembrem-se de colocar o ddd)')
             raise ValidationError('Telefone inválido, verifique a quantidade de digitos e coloque apenas numeros (lembrem-se de colocar o ddd)')
- 
+
+
+
+
+class editar_projeto_forms(forms.ModelForm):
+    class Meta:
+        model = projeto
+        fields = ['titulo', 'descricao', 'meta_investidor']
+
+    def clean_meta_investidor(self):
+        meta_investidor = self.cleaned_data.get('meta_investidor')
+        
+       
+        if isinstance(meta_investidor, Decimal128):
+            return meta_investidor.to_decimal()
+
+        
+        if isinstance(meta_investidor, str):
+            meta_investidor = meta_investidor.replace('“', '').replace('”', '') 
+            meta_investidor = meta_investidor.strip()  
+        
+        try:
+            
+            return Decimal(meta_investidor)
+        except (ValueError, InvalidOperation):
+            raise forms.ValidationError('Valor inválido para meta_investidor. Deve ser um número decimal válido.')
+
+        return meta_investidor

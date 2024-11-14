@@ -12,5 +12,6 @@ urlpatterns = [
     path("perfil/editar/", editar_usuario, name="editar_usuario"),
     path('criar_projeto/', views.criar_projeto, name='criar_projeto'),
     path("projetos2/", index, name="index"),
-    path('excluir_projeto/<str:projeto_id>/', excluir_projeto, name='excluir_projeto')
+    path('excluir_projeto/<str:projeto_id>/', excluir_projeto, name='excluir_projeto'),
+    path('editar_projeto/<str:projeto_id>/', views.editar_projeto, name='editar_projeto')
 ]

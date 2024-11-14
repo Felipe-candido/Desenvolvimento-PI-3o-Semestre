@@ -75,6 +75,7 @@
                                     <div class="d-flex d-flex justify-content-evenly flex-row-reverse bd-highlight">
                                         <button class="btn btn-warning">Detalhe</button>
                                         <a href="{% url 'excluir_projeto' projeto.id_mongo %}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este projeto?')">Excluir</a>
+                                        <a href="{% url 'editar_projeto' projeto.id_mongo %}" class="btn btn-info">Editar</a>
                                     </div>
                                 </div>
                             </div>
