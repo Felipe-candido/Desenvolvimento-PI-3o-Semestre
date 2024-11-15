@@ -89,6 +89,16 @@ class projeto(models.Model):
         return 0  
     
     def save(self, *args, **kwargs):
+        if isinstance(self.meta_investidor, Decimal128):
+            self.meta_investidor = self.meta_investidor.to_decimal()
+
+        if isinstance(self.total_investidor, Decimal128):
+            self.total_investidor = self.total_investidor.to_decimal()
+
+        # tive muitos problemas com o mongoID
+        # aparentemente essa chave que vocês criaram não tava sendo gerada as vezes
+        # Essa função garante que essa merda vai ser criada na força do ódio
         if not self.id_mongo:
-            self.id_mongo = str(ObjectId()) 
+            self.id_mongo = str(ObjectId())
+        
         super().save(*args, **kwargs)
