@@ -192,6 +192,28 @@ class editar_projeto_forms(forms.ModelForm):
     class Meta:
         model = projeto
         fields = ['titulo', 'descricao', 'meta_investidor']
+        labels = {
+            'titulo': 'Nome do projeto',
+            'descrição': 'Sobre o projeto',
+            'meta_investidor': 'Meta de investimento',
+        }
+        widgets = {
+            'titulo': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Titulo do projeto',
+                'required': 'required',
+            }),
+            'descricao': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Descrição do projeto',
+                'required': 'required',
+            }),
+            'meta_investidor': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Meta de investimento',
+                'step': '0.01',
+            }),
+        }
 
     def clean_meta_investidor(self):
         meta_investidor = self.cleaned_data.get('meta_investidor')

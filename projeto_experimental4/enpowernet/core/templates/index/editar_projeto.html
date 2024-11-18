@@ -37,28 +37,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
-    document.getElementById("projectForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        
-        // Coletando os valores do formulário
-        const titulo = document.getElementById("titulo").value;
-        const descricao = document.getElementById("descricao").value;
-        const metaInvestimento = parseFloat(document.getElementById("metaInvestimento").value);
-        
-        // Validação simples para garantir que a meta é positiva
-        if (metaInvestimento <= 0) {
-            alert("A meta de investimento deve ser um valor positivo.");
-            return;
-        }
-        
-        // Exibir os dados para o usuário (simulando a criação do projeto)
-        alert(`Projeto criado com sucesso!\n\nTítulo: ${titulo}\nDescrição: ${descricao}\nMeta de Investimento: R$ ${metaInvestimento.toFixed(2)}`);
-        
-        // Limpar o formulário após a criação do projeto
-        document.getElementById("projectForm").reset();
-    });
-</script>
 </body>
 </html>
 {% endblock %}
