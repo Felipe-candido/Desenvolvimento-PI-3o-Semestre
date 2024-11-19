@@ -109,11 +109,6 @@ def excluir_projeto(request, projeto_id):
     return redirect('perfil')
 
 
-# @login_required
-# def buscar_projetos(request):
-#     project = projeto.objects.all()
-#     return render(request, 'index/projetos.html', {'projetos': project})
-
 
 @login_required
 def editar_usuario(request):
@@ -170,6 +165,23 @@ def editar_projeto(request, projeto_id):
         'projeto': projeto_obj
     }
     return render(request, 'index/editar_projeto.html', context)
+
+
+def detalhes_projeto(request, projeto_id):
+    projeto_obj = projeto.objects.filter(id_mongo=projeto_id).first()
+    user_obj = usuario.objects.filter(UUID = projeto_obj.user_id)
+    if not projeto_obj:
+        messages.error(request, "Projeto não encontrado.")
+        return redirect('index')
+    
+    
+    context = {
+        "projeto": projeto_obj,
+        "user": user_obj,
+    }
+    
+    return render(request, 'index/post.html', context)
+    
 
 
 
