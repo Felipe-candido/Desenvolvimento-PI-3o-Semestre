@@ -156,7 +156,7 @@ class projeto_forms(forms.ModelForm):
      
     class Meta:
         model = projeto
-        fields = ("titulo", "descricao", "meta_investidor")
+        fields = ("titulo", "descricao", "meta_investidor",  "projeto_img")
         labels = {
             'titulo': 'Nome do projeto',
             'descrição': 'Sobre o projeto',
@@ -178,6 +178,9 @@ class projeto_forms(forms.ModelForm):
                 'placeholder': 'Meta de investimento',
                 'step': '0.01',
             }),
+            'projeto_img': forms.FileInput(attrs={
+                'class': 'form-control',
+            }),
         }
         
         def save(self, commit=True):
@@ -191,11 +194,12 @@ class projeto_forms(forms.ModelForm):
 class editar_projeto_forms(forms.ModelForm):
     class Meta:
         model = projeto
-        fields = ['titulo', 'descricao', 'meta_investidor']
+        fields = ['titulo', 'descricao', 'meta_investidor', 'projeto_img']
         labels = {
             'titulo': 'Nome do projeto',
             'descrição': 'Sobre o projeto',
             'meta_investidor': 'Meta de investimento',
+            'projeto_img': 'Ilustração do projeto'
         }
         widgets = {
             'titulo': forms.TextInput(attrs={

@@ -62,7 +62,8 @@ class projeto(models.Model):
     user_id = models.CharField(max_length=36)  
     meta_investidor = models.DecimalField(max_digits=10, decimal_places=2)  
     total_investidor = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
-    data_criacao = models.DateTimeField(auto_now_add=True)  
+    data_criacao = models.DateTimeField(auto_now_add=True) 
+    projeto_img = models.ImageField(upload_to="projeto/") 
 
     def __str__(self):
         return self.titulo

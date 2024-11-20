@@ -15,6 +15,7 @@ from django.contrib.sessions.models import Session
 from enpowernet.settings import MONGO_URI  
 from pymongo import MongoClient
 from bson import ObjectId, Decimal128 
+from PIL import Image
 
 def add_usuario2(request):                 
     if request.method == 'POST':
@@ -84,7 +85,7 @@ def criar_projeto(request):
     if request.method == "POST":
         
         project = projeto(user_id=request.user.UUID)
-        form = projeto_forms(request.POST, instance=project)
+        form = projeto_forms(request.POST, request.FILES, instance=project)
         
         if form.is_valid():
             project = form.save()
@@ -165,6 +166,7 @@ def editar_projeto(request, projeto_id):
         'projeto': projeto_obj
     }
     return render(request, 'index/editar_projeto.html', context)
+
 
 
 def detalhes_projeto(request, projeto_id):
