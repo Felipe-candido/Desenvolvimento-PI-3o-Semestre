@@ -21,4 +21,6 @@ Membros do projeto:
 
   - [Darlan dos Santos Oliveira Júnior](https://github.com/Jrdotan)
   - [Felipe Peliçari Candido](https://github.com/Felipe-candido)
+  - [Gabriel de Oliveira Souza](https://github.com/GabrielOSouza1)
+  - [Gabriel Cardoso Schranck](https://github.com/GabrielSchranck)
  
