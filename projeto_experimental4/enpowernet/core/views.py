@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from bson import ObjectId
 from django.http import HttpResponse, JsonResponse
 from .models import usuario, projeto
@@ -183,6 +183,13 @@ def detalhes_projeto(request, projeto_id):
     }
     
     return render(request, 'index/post.html', context)
+
+
+def ver_projeto(request, projeto_id):
+   
+    Projeto = get_object_or_404(projeto, id_mongo=projeto_id)
+
+    return render(request, 'index/ver_projeto.html', {'projeto': Projeto})
     
 
 

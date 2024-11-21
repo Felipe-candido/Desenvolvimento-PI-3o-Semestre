@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{% static 'perfil/css/main-css.css' %}">
 {% endblock %}
 
+
 {% block conteudo %}
     {% if user.is_authenticated %}
         <div class="container-fluid mt-5">
@@ -54,9 +55,11 @@
                             <div class="titulo-card">
                                 <h5>{{ projeto.titulo }}</h5>
                             </div>
-                            <div class="conteudo-card">
-                                <h6>{{ projeto.descricao}}</h6>
-                            </div>
+                            <div class="project-card">
+                                <h5>{{ projeto.titulo }}</h5>
+                                <h6>{{ projeto.descricao|truncatechars:100 }}</h6>
+                                <a href="{% url 'ver_projeto' projeto.id_mongo %}" class="btn btn-link">Ver Mais</a>
+                            </div>  
                             {% if projeto.percentual_projeto < 50.00 %}
                                 <p style="Color: #fc030b; font-weight: 700;"> {{ projeto.percentual_projeto }} </p>
                             {% elif projeto.percentual_projeto >= 50.00 and projeto.percentual_projeto < 75.00 %}
@@ -144,3 +147,37 @@
     <p>Você precisa estar logado para ver esta página.</p>
     {% endif %}
 {% endblock %}
+
+{% block js_extra %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Seleciona todos os botões "Ver Mais"
+    const buttons = document.querySelectorAll(".ver-mais");
+
+    // Adiciona evento a cada botão
+    buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            // Obtém o ID da descrição vinculada
+            const id = button.getAttribute("data-id");
+            const descricao = document.getElementById(`descricao-${id}`);
+
+            // Verifica se a descrição existe
+            if (descricao) {
+                // Alterna entre expandido/contraído
+                if (descricao.classList.contains("expandida")) {
+                    descricao.classList.remove("expandida");
+                    button.textContent = "Ver Mais";
+                } else {
+                    descricao.classList.add("expandida");
+                    button.textContent = "Ver Menos";
+                }
+            } else {
+                console.error(`Elemento descrição não encontrado: descricao-${id}`);
+            }
+        });
+    });
+});
+</script>
+
+{% endblock %}
+

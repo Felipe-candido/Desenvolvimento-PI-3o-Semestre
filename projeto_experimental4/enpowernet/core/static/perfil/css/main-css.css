@@ -88,4 +88,16 @@ body{
     margin-top: 1rem;
 }
 
+.descricao {
+    white-space: nowrap; /* Texto em uma única linha por padrão */
+    overflow: hidden;    /* Oculta o conteúdo que excede */
+    text-overflow: ellipsis; /* Adiciona reticências (...) */
+    transition: max-height 0.3s ease; /* Transição suave para a expansão */
+    max-height: 20px; /* Altura padrão */
+}
 
+.descricao.expandida {
+    white-space: normal; /* Permite múltiplas linhas */
+    overflow: visible; /* Exibe o conteúdo completo */
+    max-height: none; /* Remove o limite de altura */
+}
