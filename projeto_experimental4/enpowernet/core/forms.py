@@ -1,10 +1,13 @@
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from unicodedata import numeric
 from django import forms 
-from .models import usuario, projeto
+from .models import usuario, projeto, imagens
 from django.core.exceptions import ValidationError
 from datetime import date
 from bson import Decimal128, ObjectId
 from decimal import Decimal, InvalidOperation
+from PIL import Image
 
 class cadastro_forms(forms.ModelForm):
     genero = forms.ChoiceField(
@@ -156,7 +159,7 @@ class projeto_forms(forms.ModelForm):
      
     class Meta:
         model = projeto
-        fields = ("titulo", "descricao", "meta_investidor",  "projeto_img")
+        fields = ("titulo", "descricao", "meta_investidor",  "projeto_logo")
         labels = {
             'titulo': 'Nome do projeto',
             'descrição': 'Sobre o projeto',
@@ -178,7 +181,7 @@ class projeto_forms(forms.ModelForm):
                 'placeholder': 'Meta de investimento',
                 'step': '0.01',
             }),
-            'projeto_img': forms.FileInput(attrs={
+            'projeto_logo': forms.FileInput(attrs={
                 'class': 'form-control',
             }),
         }
@@ -188,18 +191,23 @@ class projeto_forms(forms.ModelForm):
             if commit:
                 projeto1.save()
             return projeto1
-            
+        
+
+class imagens_forms(forms.ModelForm):
+    class Meta:
+        model = imagens
+        fields = ['imagem']            
  
 
 class editar_projeto_forms(forms.ModelForm):
     class Meta:
         model = projeto
-        fields = ['titulo', 'descricao', 'meta_investidor', 'projeto_img']
+        fields = ['titulo', 'descricao', 'meta_investidor', 'projeto_logo']
         labels = {
             'titulo': 'Nome do projeto',
             'descrição': 'Sobre o projeto',
             'meta_investidor': 'Meta de investimento',
-            'projeto_img': 'Ilustração do projeto'
+            'projeto_logo': 'Ilustração do projeto'
         }
         widgets = {
             'titulo': forms.TextInput(attrs={

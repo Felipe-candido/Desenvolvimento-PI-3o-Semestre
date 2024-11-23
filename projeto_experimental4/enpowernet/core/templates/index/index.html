@@ -22,38 +22,23 @@
                 
                 <div class="col-md-6">
                     {% for projeto in projetos %}
-                         <div class="project-card">
-                            <img src="https://via.placeholder.com/50" alt="Projeto Logo" class="float-start me-3">
-                            <div class="titulo-card">
+                    <div class="project-card">
+                        <div class="d-flex align-items-center">
+                            <img src="{{ projeto.projeto_logo.url }}" alt="Projeto Logo" class="rounded-circle me-3">
+                            <div>
                                 <h5>{{ projeto.titulo }}</h5>
-                            </div>
-                            <div class="conteudo-card">
-                                <h6>{{ projeto.descricao}}</h6>
-                            </div>
-                            {% if projeto.percentual_projeto < 50.00 %}
-                                <p style="Color: #fc030b; font-weight: 700;"> {{ projeto.percentual_projeto }} </p>
-                            {% elif projeto.percentual_projeto >= 50.00 and projeto.percentual_projeto < 75.00 %}
-                                <p style="Color: #f0a502; font-weight: 700;"> {{ projeto.percentual_projeto }} </p>
-                            {% elif projeto.percentual_projeto >= 75.00 %}
-                                <p style="Color: #0cad00; font-weight: 700;"> {{ projeto.percentual_projeto }} </p>
-                            {% endif %}
-
-                            <div class="progress">
-                                <div class="progress-bar" style="width: {% if projeto.percentual_projeto > 100 %} 100% {% else %} {{ projeto.percentual_projeto }}% {% endif %};
-                                background-color: {% if projeto.percentual_projeto >= 75 %} green {% elif projeto.percentual_projeto >= 50 and projeto.percentual_projeto < 75.00 %} yellow {% else %} red {% endif %};
-                                height: 100%; border-radius: 10px;"></div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-9">
-                                    <p class="font-weight-bold" style="color: #034994; font-weight: 700;">Meta: {{ projeto.total_investidor }}/{{ projeto.meta_investidor }}</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="d-flex justify-content-end">
-                                        <a href="{% url 'detalhes_projeto' projeto.id_mongo %}" class="btn btn-warning">Detalhes</a>
-                                    </div>
-                                </div>
+                                <p class="text-muted small">{{ projeto.descricao }}</p>
                             </div>
                         </div>
+                        <div class="progress my-2">
+                            <div class="progress-bar {% if projeto.percentual_projeto >= 75 %}green{% elif projeto.percentual_projeto >= 50 %}yellow{% else %}red{% endif %}" 
+                                 style="width: {{ projeto.percentual_projeto }}%;"></div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <p class="text-primary fw-bold">Meta: {{ projeto.total_investidor }}/{{ projeto.meta_investidor }}</p>
+                            <a href="{% url 'detalhes_projeto' projeto.id_mongo %}" class="btn btn-warning btn-sm">Detalhes</a>
+                        </div>
+                    </div>
 
 
                     {% empty %}

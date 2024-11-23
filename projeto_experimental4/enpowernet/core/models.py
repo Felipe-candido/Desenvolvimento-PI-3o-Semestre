@@ -63,7 +63,8 @@ class projeto(models.Model):
     meta_investidor = models.DecimalField(max_digits=10, decimal_places=2)  
     total_investidor = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
     data_criacao = models.DateTimeField(auto_now_add=True) 
-    projeto_img = models.ImageField(upload_to="projeto/") 
+    projeto_logo = models.ImageField(upload_to="projeto/") 
+    imagens = models
 
     def __str__(self):
         return self.titulo
@@ -77,8 +78,6 @@ class projeto(models.Model):
             else:
                 meta_investimento = self.meta_investidor  
 
-            # conversão, favor não remover felipe ou gabriel kkkkkkkk banco não retorna barra sem isso
-            # Vou excluir >:)
             if isinstance(self.total_investidor, Decimal128):
                 total_investido = self.total_investidor.to_decimal()  
             else:
@@ -96,10 +95,15 @@ class projeto(models.Model):
         if isinstance(self.total_investidor, Decimal128):
             self.total_investidor = self.total_investidor.to_decimal()
 
-        # tive muitos problemas com o mongoID
-        # aparentemente essa chave que vocês criaram não tava sendo gerada as vezes
-        # Essa função garante que essa merda vai ser criada na força do ódio
         if not self.id_mongo:
             self.id_mongo = str(ObjectId())
         
         super().save(*args, **kwargs)
+        
+        
+class imagens(models.Model):
+    projeto = models.ForeignKey(projeto, related_name="imagens", on_delete=models.CASCADE)
+    imagem = models.ImageField(upload_to="projeto/imagens/")
+    
+    def __str__(self):
+        return f"Imagem de {self.projeto.titulo}"

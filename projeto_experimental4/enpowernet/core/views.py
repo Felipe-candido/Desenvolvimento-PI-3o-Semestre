@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from bson import ObjectId
 from django.http import HttpResponse, JsonResponse
-from .models import usuario, projeto
+from .models import usuario, projeto, imagens
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
@@ -9,13 +9,17 @@ from datetime import date
 from django.utils import timezone
 from decimal import Decimal, InvalidOperation
 from .services import user_service
-from core.forms import cadastro_forms, editar_perfil_forms, projeto_forms, editar_projeto_forms
+from core.forms import cadastro_forms, editar_perfil_forms, projeto_forms, editar_projeto_forms, imagens
 import uuid
 from django.contrib.sessions.models import Session
 from enpowernet.settings import MONGO_URI  
 from pymongo import MongoClient
 from bson import ObjectId, Decimal128 
 from PIL import Image
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import sys
+
 
 def add_usuario2(request):                 
     if request.method == 'POST':
@@ -88,7 +92,58 @@ def criar_projeto(request):
         form = projeto_forms(request.POST, request.FILES, instance=project)
         
         if form.is_valid():
+            
+            projeto_logo = form.cleaned_data.get('projeto_logo')
+            
+            if projeto_logo:
+                
+                img = Image.open(projeto_logo)
+
+                tamanho = (100, 100)
+                img.thumbnail(tamanho)
+
+                buffer = BytesIO()
+                img_format = img.format if img.format else 'JPEG'
+                img.save(buffer, format=img_format)
+                buffer.seek(0)
+
+                projeto_logo = InMemoryUploadedFile(
+                    buffer, 
+                    'ImageField', 
+                    projeto_logo.name, 
+                    f'image/{img_format.lower()}', 
+                    sys.getsizeof(buffer), 
+                    None
+                )
+
+                form.instance.projeto_logo = projeto_logo
+
             project = form.save()
+            
+            img = request.FILES.getlist('imagens')
+            for imagem in img:
+                
+                img_final = Image.open(imagem)
+                tamanho = (1500, 500)
+                img_final.thumbnail(tamanho)
+
+                buffer = BytesIO()
+                img_format = img_final.format if img_final.format else 'JPEG'
+                img_final.save(buffer, format=img_format)
+                buffer.seek(0)
+
+                imagem = InMemoryUploadedFile(
+                    buffer, 
+                    'ImageField', 
+                    imagem.name, 
+                    f'image/{img_format.lower()}', 
+                    sys.getsizeof(buffer), 
+                    None
+                )
+                
+                imagens.objects.create(projeto=project, imagem=imagem)
+                
+                
             messages.success(request, "Projeto criado com sucesso!")
             return redirect('perfil')
 
@@ -168,7 +223,7 @@ def editar_projeto(request, projeto_id):
     return render(request, 'index/editar_projeto.html', context)
 
 
-
+@login_required
 def detalhes_projeto(request, projeto_id):
     projeto_obj = projeto.objects.filter(id_mongo=projeto_id).first()
     user_obj = usuario.objects.filter(UUID = projeto_obj.user_id)
@@ -182,14 +237,19 @@ def detalhes_projeto(request, projeto_id):
         "user": user_obj,
     }
     
-    return render(request, 'index/post.html', context)
+    return render(request, 'index/detalhes.html', context)
 
 
 def ver_projeto(request, projeto_id):
-   
+
+    usuario = request.user
     Projeto = get_object_or_404(projeto, id_mongo=projeto_id)
 
-    return render(request, 'index/ver_projeto.html', {'projeto': Projeto})
+    context = {
+        "usuario": usuario,
+        "projeto": Projeto,
+    }
+    return render(request, 'index/ver_projeto.html', context)
     
 
 

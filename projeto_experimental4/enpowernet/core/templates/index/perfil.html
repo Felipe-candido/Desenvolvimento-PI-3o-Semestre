@@ -44,17 +44,13 @@
                         </div>
                     </div>
 
-                    <!-- Lista de Projetos do Empreendedor -->
                     <div class="col-md-8">
                         <h3 class="mb-4 titulo-projetos">Projetos Postados</h3>
 
-                        <!-- Card de Projeto -->
+                
                         {% for projeto in projetos %}
                             <div class="project-card">
                             <img src="https://via.placeholder.com/50" alt="Projeto Logo" class="float-start me-3">
-                            <div class="titulo-card">
-                                <h5>{{ projeto.titulo }}</h5>
-                            </div>
                             <div class="project-card">
                                 <h5>{{ projeto.titulo }}</h5>
                                 <h6>{{ projeto.descricao|truncatechars:100 }}</h6>

@@ -29,7 +29,11 @@
                 </div>
                 <div class="form-group">
                     <label for="descricao" class="form-label form1">Imagem do projeto</label>
-                    {{ form.projeto_img }}
+                    {{ form.projeto_logo }}
+                </div>
+                <div class="form-group">
+                    <h3>Imagens do Projeto</h3>
+                    <input type="file" name="imagens" multiple>
                 </div>
                 <button type="submit" class="btn submit-btn btn-block">Criar Projeto</button>
             </form>
