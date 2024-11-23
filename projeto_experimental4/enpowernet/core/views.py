@@ -170,7 +170,7 @@ def excluir_projeto(request, projeto_id):
 def editar_usuario(request):
     if request.method == "POST":
         user = request.user
-        form = editar_perfil_forms(request.POST, instance=user)
+        form = editar_perfil_forms(request.POST, request.FILES, instance=user)
         
         if form.is_valid():
             user = form.save()

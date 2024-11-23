@@ -40,6 +40,7 @@ class usuario(AbstractBaseUser):
     sobre = models.CharField(blank=True, null=True, max_length=500)
     cidade = models.CharField(max_length=255)
     estado = models.CharField(max_length=2)
+    foto = models.ImageField(upload_to="foto_usuarios/", null=True, blank=True)
 
     objects = UsuarioManager()
 
@@ -64,7 +65,7 @@ class projeto(models.Model):
     total_investidor = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
     data_criacao = models.DateTimeField(auto_now_add=True) 
     projeto_logo = models.ImageField(upload_to="projeto/") 
-    imagens = models
+
 
     def __str__(self):
         return self.titulo

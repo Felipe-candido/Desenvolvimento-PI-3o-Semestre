@@ -102,7 +102,7 @@ class cadastro_forms(forms.ModelForm):
 class editar_perfil_forms(forms.ModelForm): 
     class Meta:
         model = usuario
-        fields = ["nome", "telefone", "sobre", "cidade", "estado"]
+        fields = ["nome", "telefone", "sobre", "cidade", "estado", "foto"]
         labels = {
             'nome': 'Nome Completo',
             'telefone': 'Telefone de Contato',
@@ -132,6 +132,9 @@ class editar_perfil_forms(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Estado',
                 'required': 'required',
+            }),
+            'foto': forms.FileInput(attrs={
+            'class': 'form-control',
             }),
         }
         
