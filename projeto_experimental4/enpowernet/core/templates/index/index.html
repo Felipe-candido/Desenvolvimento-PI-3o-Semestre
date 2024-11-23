@@ -13,7 +13,11 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="profile-card">
+                        {% if usuario.foto %}
+                            <img src="{{ usuario.foto.url }}" alt="Profile Image" class="profile-img mb-3">
+                        {% else %}
                         <img src="https://via.placeholder.com/100" alt="Profile Image" class="profile-img mb-3">
+                        {% endif %}
                         <h5>{{ usuario.nome }}</h5>
                         <p>{{ usuario.cidade }},{{ usuario.estado }}</p>
                         <p>{{ usuario.sobre}}</p>

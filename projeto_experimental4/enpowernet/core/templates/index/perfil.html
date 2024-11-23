@@ -15,9 +15,15 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-sidebar">
+                            {% if usuario.foto %}
+                            <div class="d-flex justify-content-center">
+                                <img src="{{ usuario.foto.url }}" alt="Foto do Usuário" class="profile-img">
+                            </div>
+                            {% else %}
                             <div class="d-flex justify-content-center">
                                 <img src="{% static 'perfil/imagens/sem_perfil.png' %}" alt="Foto do Usuário" class="profile-img">
                             </div>
+                            {% endif %}
                             <h3 class="text-center">{{ nome }}</h3>
                             <hr>
                             <h5>Informações de Contato</h5>

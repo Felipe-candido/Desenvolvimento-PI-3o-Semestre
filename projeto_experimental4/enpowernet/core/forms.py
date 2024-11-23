@@ -70,6 +70,10 @@ class cadastro_forms(forms.ModelForm):
             raise ValidationError(f'Esse e-mail já está cadastrado.')
         return this_email
         
+    def clean_nome(self):
+        nome = self.cleaned_data['nome']
+        return str(nome).title()
+    
         
     def clean_telefone(self):
         telefone = self.cleaned_data['telefone']
@@ -79,8 +83,7 @@ class cadastro_forms(forms.ModelForm):
             raise ValidationError('Telefone inválido, verifique a quantidade de digitos e coloque apenas numeros (lembrem-se de colocar o ddd)')
         raise ValidationError('Telefone inválido, verifique a quantidade de digitos e coloque apenas numeros (lembrem-se de colocar o ddd)')
     
-        
-        
+         
     def clean_data_nascimento(self):
         data_nascimento = self.cleaned_data['data_nascimento']
         hoje = date.today()

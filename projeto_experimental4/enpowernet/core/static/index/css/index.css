@@ -1,6 +1,6 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
+    background-color: rgb(201, 235, 245);
 }
 
 .navbar {
@@ -44,9 +44,9 @@ body {
 }
 
 .profile-img {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    
+    width: 200px;
+    height: 200px;
     border: 4px solid #007bff;
 }
 
