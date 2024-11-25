@@ -45,15 +45,30 @@ body {
 
 .profile-img {
     
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     border: 4px solid #007bff;
+}
+
+.text-card{
+    font-size: 15pt;
 }
 
 h5, p {
     margin: 0;
 }
 
+.descricao-card{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 15pt;
+}
+
+.project_img{
+    width: 100px;
+    height: 100px;
+}
 .project-card {
     background: #fff;
     border-radius: 12px;
@@ -70,6 +85,7 @@ h5, p {
 
 .project-card h5 {
     color: #007bff;
+    font-size: 27pt;
 }
 
 .progress-bar {

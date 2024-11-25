@@ -223,30 +223,15 @@ def editar_projeto(request, projeto_id):
     return render(request, 'index/editar_projeto.html', context)
 
 
-@login_required
-def detalhes_projeto(request, projeto_id):
-    projeto_obj = projeto.objects.filter(id_mongo=projeto_id).first()
-    user_obj = usuario.objects.filter(UUID = projeto_obj.user_id)
-    if not projeto_obj:
-        messages.error(request, "Projeto não encontrado.")
-        return redirect('index')
-    
-    
-    context = {
-        "projeto": projeto_obj,
-        "user": user_obj,
-    }
-    
-    return render(request, 'index/detalhes.html', context)
 
 
 def ver_projeto(request, projeto_id):
 
-    usuario = request.user
     Projeto = get_object_or_404(projeto, id_mongo=projeto_id)
+    Usuario = get_object_or_404(usuario, UUID=Projeto.user_id)
 
     context = {
-        "usuario": usuario,
+        "usuario": Usuario,
         "projeto": Projeto,
     }
     return render(request, 'index/ver_projeto.html', context)

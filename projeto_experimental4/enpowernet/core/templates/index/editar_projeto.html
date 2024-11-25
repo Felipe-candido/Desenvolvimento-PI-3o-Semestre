@@ -10,7 +10,7 @@
 {% block conteudo %}
 
 <div class="container projeto">
-    <h2 class="text-center mb-4">Editar_projeto</h2>
+    <h2 class="text-center mb-4">Editar Projeto</h2>
     <div class="card shadow">
         <div class="card-body">
             <form method="POST" action="{% url 'editar_projeto' projeto.id_mongo %}">
@@ -25,7 +25,11 @@
                 </div>
                 <div class="form-group">
                     <label for="metaInvestimento" class="form-label form1">Meta de Investimento (R$)</label>
-                    {{ form.meta_investidor}}
+                    {{ form.meta_investidor }}
+                </div>
+                <div class="form-group">
+                    <label for="categoria" class="form-label form1">Categoria</label>
+                    {{ form.categoria }}
                 </div>
                 <button type="submit" class="btn submit-btn btn-block">Editar projeto</button>
             </form>

@@ -14,7 +14,7 @@
                 <div class="col-md-3">
                     <div class="profile-card">
                         {% if usuario.foto %}
-                            <img src="{{ usuario.foto.url }}" alt="Profile Image" class="profile-img mb-3">
+                            <img src="{{ usuario.foto.url }}" alt="Imagem do dono" class="profile-img mb-3">
                         {% else %}
                         <img src="https://via.placeholder.com/100" alt="Profile Image" class="profile-img mb-3">
                         {% endif %}
@@ -28,11 +28,14 @@
                     {% for projeto in projetos %}
                     <div class="project-card">
                         <div class="d-flex align-items-center">
-                            <img src="{{ projeto.projeto_logo.url }}" alt="Projeto Logo" class="rounded-circle me-3">
-                            <div>
+                            <img src="{{ projeto.projeto_logo.url }}" alt="Projeto Logo" class="rounded-circle me-3 project_img">
+                            <div class="text-card">
                                 <h5>{{ projeto.titulo }}</h5>
-                                <p class="text-muted small">{{ projeto.descricao }}</p>
+                                <p class="text-muted small">asd{{ projeto.descricao }}</p>
                             </div>
+                        </div>
+                        <div class="descricao-card">
+                            <p style="color: black;">{{ projeto.descricao }}</p>
                         </div>
                         <div class="progress my-2">
                             <div class="progress-bar {% if projeto.percentual_projeto >= 75 %}green{% elif projeto.percentual_projeto >= 50 %}yellow{% else %}red{% endif %}" 
@@ -40,7 +43,7 @@
                         </div>
                         <div class="d-flex justify-content-between align-items-center mt-2">
                             <p class="text-primary fw-bold">Meta: {{ projeto.total_investidor }}/{{ projeto.meta_investidor }}</p>
-                            <a href="{% url 'detalhes_projeto' projeto.id_mongo %}" class="btn btn-warning btn-sm">Detalhes</a>
+                            <a href="{% url 'ver_projeto' projeto.id_mongo %}" class="btn btn-warning btn-sm">Detalhes</a>
                         </div>
                     </div>
 
@@ -52,7 +55,6 @@
                             </div>
                         </div>
                     {% endfor %}
-                    <button class="btn btn-view-more w-100 mt-3">Ver Mais</button>
                 </div>
                 
 
@@ -83,7 +85,9 @@
         {% else %}
         <div class="container-fluid mt-5">
             <div class="container">
-                <h3 class="text-light">Você precisa estar logado para ver os projetos.</h3>
+                <center>
+                    <h3>Você precisa estar logado para ver os projetos.</h3>
+                </center> 
             </div>
         </div>
         {% endif %}

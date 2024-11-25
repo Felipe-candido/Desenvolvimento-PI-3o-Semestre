@@ -141,6 +141,17 @@ class editar_perfil_forms(forms.ModelForm):
             }),
         }
         
+        def clean_nome(self):
+            nome = self.cleaned_data['nome']
+            return str(nome).title()
+        
+        def clean_data_nascimento(self):
+            data_nascimento = self.cleaned_data['data_nascimento']
+            hoje = date.today()
+            if data_nascimento > hoje:
+                raise ValidationError('Data inválida')
+            return data_nascimento
+        
         
         def save(self, commit=True):
             user = super().save(commit=False)
@@ -162,10 +173,17 @@ class editar_perfil_forms(forms.ModelForm):
  
     
 class projeto_forms(forms.ModelForm):
+    categoria = forms.ChoiceField(
+        choices=[('', 'Escolha a categoria'), *projeto.escolha_categoria],
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+            'required': 'required',
+        }),
+    )
      
     class Meta:
         model = projeto
-        fields = ("titulo", "descricao", "meta_investidor",  "projeto_logo")
+        fields = ("titulo", "descricao", "meta_investidor",  "projeto_logo", "categoria")
         labels = {
             'titulo': 'Nome do projeto',
             'descrição': 'Sobre o projeto',
@@ -190,13 +208,19 @@ class projeto_forms(forms.ModelForm):
             'projeto_logo': forms.FileInput(attrs={
                 'class': 'form-control',
             }),
+            
         }
+        
+        def clean_titulo(self):
+            titulo = self.cleaned_data['titulo']
+            return str(titulo).title()
         
         def save(self, commit=True):
             projeto1 = super().save(commit=False)
             if commit:
                 projeto1.save()
             return projeto1
+        
         
 
 class imagens_forms(forms.ModelForm):
@@ -252,3 +276,7 @@ class editar_projeto_forms(forms.ModelForm):
             raise forms.ValidationError('Valor inválido para meta_investidor. Deve ser um número decimal válido.')
 
         return meta_investidor
+    
+    def clean_titulo(self):
+        titulo = self.cleaned_data['titulo']
+        return str(titulo).title()

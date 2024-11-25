@@ -10,14 +10,16 @@
 {% block conteudo %}
     {% if user.is_authenticated %}
         <div class="container mt-5">
-            <div class="profile-card">
-                <h4>Dono do Projeto:</h4>
-                <div class="d-flex align-items-center">
-                    <img src="https://via.placeholder.com/50" alt="Imagem do Dono" class="profile-img1">
-                    <div class="ms-3">
-                        <h1>{{ usuario.nome }}</h1>
-                        <h1 class="profile-details">{{ usuario.sobre }}</h1>
-                    </div>
+            <div class="profile-card card1">
+                <h3>Dono do Projeto:</h4>
+                <div class="align-items-center">
+                    {% if usuario.foto %}
+                        <img src="{{ usuario.foto.url }}" alt="Imagem do Dono" class="profile-img1">
+                    {% else %}
+                        <img src="https://via.placeholder.com/50" alt="Imagem do Dono" class="profile-img1">
+                    {% endif %}
+                    <h1>{{ usuario.nome }}</h1>
+                    <h1 class="profile-details">{{ usuario.sobre }}</h1>
                 </div>
             </div>
         
