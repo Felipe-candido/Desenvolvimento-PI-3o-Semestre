@@ -215,6 +215,10 @@ class projeto_forms(forms.ModelForm):
             titulo = self.cleaned_data['titulo']
             return str(titulo).title()
         
+        def clean_categoria(self):
+            categoria = self.cleaned_data['categoria']
+            return str(categoria).upper()
+        
         def save(self, commit=True):
             projeto1 = super().save(commit=False)
             if commit:

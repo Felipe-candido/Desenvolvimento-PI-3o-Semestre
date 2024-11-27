@@ -1,6 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f7f7f7;
+    background-color: #f3f3f3;
 }
 
 .carousel-item img {
@@ -8,6 +8,27 @@ body {
     height: 500px;
     object-fit: cover;
 }
+
+.carousel{
+    margin-top: 50px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.titulo{
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.card1{
+    margin-bottom: 50px;
+}
+
+
+.linha2{
+    margin-top: 30px;
+}
+
 .profile-img1 {
     width: 100px;
     height: 100px;
@@ -15,28 +36,35 @@ body {
     object-fit: cover;
 }
 .project-title {
-    font-size: 2.5rem;
+    font-size: 45pt;
     font-weight: bold;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+
+    h1{
+        font-weight: bold;
+        font-size: 45pt;
+    }
 }
 .project-text {
-    font-size: 1.1rem;
+    font-size: 30pt;
     color: #555;
     line-height: 1.8;
+    margin-top: 40px;
 }
 .categories-list {
     list-style: none;
     padding: 0;
 }
 .categories-list li {
-    font-size: 1rem;
+    font-size: 20pt;
     background-color: #e9b421;
     color: rgb(0, 0, 0);
     padding: 8px;
     border-radius: 5px;
     margin-bottom: 10px;
-    width: 30%;
+    width: 100%;
 }
 .comments-section {
     margin-top: 30px;
@@ -69,7 +97,20 @@ body {
 
 
 .espaco {
-    margin-top: 40px; 
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h4{
+        font-size: 25pt;
+        font-weight: bold;
+    } 
+}
+
+.categoria{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media (min-width: 768px) {

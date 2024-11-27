@@ -18,9 +18,11 @@
                         {% else %}
                         <img src="https://via.placeholder.com/100" alt="Profile Image" class="profile-img mb-3">
                         {% endif %}
-                        <h5>{{ usuario.nome }}</h5>
-                        <p>{{ usuario.cidade }},{{ usuario.estado }}</p>
-                        <p>{{ usuario.sobre}}</p>
+                        <div class="text-profile">
+                            <h5>{{ usuario.nome }}</h5>
+                            <p>{{ usuario.cidade }},{{ usuario.estado }}</p>
+                            <p>{{ usuario.sobre}}</p>
+                        </div>
                     </div>
                 </div>
                 
@@ -31,11 +33,13 @@
                             <img src="{{ projeto.projeto_logo.url }}" alt="Projeto Logo" class="rounded-circle me-3 project_img">
                             <div class="text-card">
                                 <h5>{{ projeto.titulo }}</h5>
-                                <p class="text-muted small">asd{{ projeto.descricao }}</p>
+                                <p class="text-muted small">{{ projeto.descricao }}</p>
                             </div>
                         </div>
                         <div class="descricao-card">
-                            <p style="color: black;">{{ projeto.descricao }}</p>
+                            <center>
+                                <p style="color: black;">{{ projeto.descricao }}</p>
+                            </center>
                         </div>
                         <div class="progress my-2">
                             <div class="progress-bar {% if projeto.percentual_projeto >= 75 %}green{% elif projeto.percentual_projeto >= 50 %}yellow{% else %}red{% endif %}" 

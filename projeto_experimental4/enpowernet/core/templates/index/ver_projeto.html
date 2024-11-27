@@ -10,8 +10,11 @@
 {% block conteudo %}
     {% if user.is_authenticated %}
         <div class="container mt-5">
+            <div class="project-title">
+                <h1>DETALHES DO PROJETO</h1>
+            </div>
             <div class="profile-card card1">
-                <h3>Dono do Projeto:</h4>
+                <h1>Dono do Projeto:</h1>
                 <div class="align-items-center">
                     {% if usuario.foto %}
                         <img src="{{ usuario.foto.url }}" alt="Imagem do Dono" class="profile-img1">
@@ -22,8 +25,18 @@
                     <h1 class="profile-details">{{ usuario.sobre }}</h1>
                 </div>
             </div>
+
+            <div class="linha">
+                <hr>
+            </div>
         
-        
+            <h2 class="project-title">{{ projeto.titulo}}</h2>
+
+            <div class="linha">
+                <hr>
+            </div>
+
+
             <div id="projectCarousel" class="carousel slide section-spacing" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     {% for imagem in projeto.imagens.all %}
@@ -44,39 +57,32 @@
         
         
             <div class="mt-4">
-                <h2 class="project-title">{{ projeto.titulo}}</h2>
-                <p class="project-text">
-                    {{ projeto.descricao}}
-                </p>
+                <h2 class="project-text">
+                    {{ projeto.descricao }}
+                </h2>
             </div>
-        
-        
-            <div class="espaco">
-                <h4>Categorias:</h4>
-                <ul class="categories-list">
-                    <li>Energia Sustentável</li>
-                    <li>Inovação Tecnológica</li>
-                    <li>Meio Ambiente</li>
-                </ul>
+            
+            <div class="linha2">
+                <hr>
             </div>
-        
-            <div class="comments-section section-spacing">
-                <h4>Comentários:</h4>
-                <div class="comment">
-                    <div class="d-flex align-items-center">
-                        <img src="https://via.placeholder.com/50" alt="Imagem do Comentador" class="profile-img1">
-                        <strong class="ms-2 comment-author">João Silva</strong>
-                    </div>
-                    <p class="mt-2">Ótima ideia! Acredito que a sustentabilidade é o futuro, e este projeto tem grande potencial. Parabéns!</p>
+
+            
+                <div class="espaco">
+                    <h4>CATEGORIA</h4>
                 </div>
-                <div class="comment">
-                    <div class="d-flex align-items-center">
-                        <img src="https://via.placeholder.com/50" alt="Imagem do Comentador" class="profile-img1">
-                        <strong class="ms-2 comment-author">Maria Oliveira</strong>
-                    </div>
-                    <p class="mt-2">Excelente proposta! Adoraria saber mais sobre como posso contribuir.</p>
+
+                <div class="categoria">
+                    <ul class="categories-list">
+                        <li>{{ projeto.categoria }}</li>
+                    </ul>
                 </div>
+            
+
+            <div class="linha">
+                <hr>
             </div>
+
+        
         </div>
     {% else %}
     {% endif %}

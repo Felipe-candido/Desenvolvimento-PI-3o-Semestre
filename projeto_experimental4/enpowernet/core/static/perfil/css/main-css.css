@@ -22,6 +22,10 @@ body{
     background-color: #01172F;
 }
 
+.botoes{
+    margin-top: 20px;
+}
+
 .navbar{
     background-color: #01172F;
     margin-top: 0;
@@ -56,6 +60,14 @@ body{
     object-fit: cover;
     border-radius: 50%;
 }
+
+
+.botoes-projeto{
+    margin-top: 10px;
+    display: flex;
+    right: 0;
+}
+
 
 .project-card {
     margin-bottom: 20px;

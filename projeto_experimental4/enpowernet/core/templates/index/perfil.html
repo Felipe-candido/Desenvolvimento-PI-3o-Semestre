@@ -39,7 +39,7 @@
                                     <p><strong>Adicione uma descrição</strong></p>
                                 {% endif %}
                             </p>
-                            <div class="d-flex justify-content-center mb-3">
+                            <div class="d-flex justify-content-center mb-3 botoes">
                                 <button type="button" class="btn btn-primary me-4" data-bs-toggle="modal" data-bs-target="#editar_perfil">
                                     Editar perfil
                                 </button>
@@ -51,43 +51,36 @@
                     </div>
 
                     <div class="col-md-8">
-                        <h3 class="mb-4 titulo-projetos">Projetos Postados</h3>
+                        <h3 class="mb-4 titulo-projetos">Meus projetos </h3>
 
                 
                         {% for projeto in projetos %}
                             <div class="project-card">
-                            <img src="https://via.placeholder.com/50" alt="Projeto Logo" class="float-start me-3">
-                            <div class="project-card">
-                                <h5>{{ projeto.titulo }}</h5>
-                                <h6>{{ projeto.descricao|truncatechars:100 }}</h6>
-                                <a href="{% url 'ver_projeto' projeto.id_mongo %}" class="btn btn-link">Ver Mais</a>
-                            </div>  
-                            {% if projeto.percentual_projeto < 50.00 %}
-                                <p style="Color: #fc030b; font-weight: 700;"> {{ projeto.percentual_projeto }} </p>
-                            {% elif projeto.percentual_projeto >= 50.00 and projeto.percentual_projeto < 75.00 %}
-                                <p style="Color: #f0a502; font-weight: 700;"> {{ projeto.percentual_projeto }} </p>
-                            {% elif projeto.percentual_projeto >= 75.00 %}
-                                <p style="Color: #0cad00; font-weight: 700;"> {{ projeto.percentual_projeto }} </p>
-                            {% endif %}
-                            <p style="color: black;">Aqui tem um super teste olha:{{projeto.id_mongo}}</p>
-                            <div class="progress">
-                                <div class="progress-bar" style="width: {% if projeto.percentual_projeto > 100 %} 100% {% else %} {{ projeto.percentual_projeto }}% {% endif %};
-                                background-color: {% if projeto.percentual_projeto >= 75 %} green {% elif projeto.percentual_projeto >= 50 and projeto.percentual_projeto < 75.00 %} yellow {% else %} red {% endif %};
-                                height: 100%; border-radius: 10px;"></div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-9">
-                                    <p class="font-weight-bold" style="color: #034994; font-weight: 700;">Meta: {{ projeto.total_investidor }}/{{ projeto.meta_investidor }}</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="d-flex d-flex justify-content-evenly flex-row-reverse bd-highlight">
-                                        <button class="btn btn-warning">Detalhe</button>
-                                        <a href="{% url 'excluir_projeto' projeto.id_mongo %}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este projeto?')">Excluir</a>
-                                        <a href="{% url 'editar_projeto' projeto.id_mongo %}" class="btn btn-info">Editar</a>
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ projeto.projeto_logo.url }}" alt="Projeto Logo" class="rounded-circle me-3 project_img">
+                                    <div class="text-card">
+                                        <h5>{{ projeto.titulo }}</h5>
+                                        <p class="text-muted small">{{ projeto.descricao }}</p>
                                     </div>
                                 </div>
+                                <div class="descricao-card">
+                                    <center>
+                                        <p style="color: black;">{{ projeto.descricao }}</p>
+                                    </center>
+                                </div>
+                                <div class="progress my-2">
+                                    <div class="progress-bar {% if projeto.percentual_projeto >= 75 %}green{% elif projeto.percentual_projeto >= 50 %}yellow{% else %}red{% endif %}" 
+                                         style="width: {{ projeto.percentual_projeto }}%;"></div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <p class="text-primary fw-bold">Meta: {{ projeto.total_investidor }}/{{ projeto.meta_investidor }}</p>
+                                </div>
+                                <div class="botoes-projeto">
+                                    <a href="{% url 'ver_projeto' projeto.id_mongo %}" class="btn btn-warning btn-sm">Detalhes</a>
+                                    <a href="{% url 'excluir_projeto' projeto.id_mongo %}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este projeto?')">Excluir</a>
+                                    <a href="{% url 'editar_projeto' projeto.id_mongo %}" class="btn btn-info">Editar</a>
+                                </div>
                             </div>
-                        </div>
                         {% empty %}
                             {% comment %} <div class="card project-card mb-3">
                                 <div class="card-body">
