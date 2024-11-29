@@ -10,13 +10,6 @@ from decimal import Decimal, InvalidOperation
 from PIL import Image
 
 class cadastro_forms(forms.ModelForm):
-    genero = forms.ChoiceField(
-            choices=[('', 'Escolha o gênero'), *usuario.escolha_genero],
-            widget=forms.Select(attrs={
-                'class': 'form-control',
-                'required': 'required',
-            }),
-            )
     senha = forms.CharField(widget=forms.PasswordInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Senha',
@@ -26,7 +19,7 @@ class cadastro_forms(forms.ModelForm):
     
     class Meta:
         model = usuario
-        fields = ["email", "nome", "genero", "telefone", "data_nascimento", "senha", "cidade", "estado"]
+        fields = ["email", "nome", "data_nascimento", "senha"]
         widgets = {
             'data_nascimento': forms.DateInput(attrs={
                 'type': 'date',
@@ -44,21 +37,6 @@ class cadastro_forms(forms.ModelForm):
                 'placeholder': 'Email',
                 'required': 'required',
                 }),
-            'telefone': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Telefone',
-                'required': 'required',
-                }),
-            'cidade': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Cidade',
-                'required': 'required',
-                }),
-            'estado': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Estado',
-                'required': 'required',
-                }),
         }
         
     def clean_email(self):
@@ -74,14 +52,6 @@ class cadastro_forms(forms.ModelForm):
         nome = self.cleaned_data['nome']
         return str(nome).title()
     
-        
-    def clean_telefone(self):
-        telefone = self.cleaned_data['telefone']
-        if telefone.isnumeric():
-            if len(telefone) == 11:
-                return telefone
-            raise ValidationError('Telefone inválido, verifique a quantidade de digitos e coloque apenas numeros (lembrem-se de colocar o ddd)')
-        raise ValidationError('Telefone inválido, verifique a quantidade de digitos e coloque apenas numeros (lembrem-se de colocar o ddd)')
     
          
     def clean_data_nascimento(self):
@@ -120,7 +90,6 @@ class editar_perfil_forms(forms.ModelForm):
             'telefone': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Telefone',
-                'required': 'required',
             }),
             'sobre': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -129,12 +98,10 @@ class editar_perfil_forms(forms.ModelForm):
             'cidade': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Cidade',
-                'required': 'required',
             }),
             'estado': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Estado',
-                'required': 'required',
             }),
             'foto': forms.FileInput(attrs={
             'class': 'form-control',
@@ -144,6 +111,14 @@ class editar_perfil_forms(forms.ModelForm):
         def clean_nome(self):
             nome = self.cleaned_data['nome']
             return str(nome).title()
+        
+        def clean_cidade(self):
+            cidade = self.cleaned_data['cidade']
+            return str(cidade).title()
+        
+        def clean_estado(self):
+            estado = self.cleaned_data['estado']
+            return str(estado).upper()
         
         def clean_data_nascimento(self):
             data_nascimento = self.cleaned_data['data_nascimento']

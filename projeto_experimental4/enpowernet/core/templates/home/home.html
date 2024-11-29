@@ -5,52 +5,70 @@
 {% endblock %}
 {% block conteudo %}
 <div class="container-fluid middle-page">
-    <div class="container p-3 border-bottom">
-        <div class="row featurette mt-4">
+    <div class="p-3 border-bottom">
+        <div class="row featurette mt-0 align-items-center">
             <div class="col-md-7 texto-principal">
-                <h1 class="featurette-heading fw-normal lh-2 text-light titulo-principal">Conheça quem pode levar suas ideias além.</h2>
-                <p class="lead fw-normal lh-2 pt-2">Nossa missão é conectar startups e empreendedores com investidores, facilitando o acesso a parcerias que impulsionam suas ideias e promovem o crescimento. descubra como transformar sua visão em realidade com o apoio certo</p>
+                <h1 class="featurette-heading fw-bold lh-1 text-light titulo-principal">
+                    Conectamos você ao futuro do empreendedorismo
+                </h1>
+                <p class="lead">
+                    Nossa missão é criar pontes entre startups, empreendedores e investidores para transformar ideias inovadoras em grandes realizações.
+                </p>
+                <div class="mt-4 d-flex gap-3 botoes">
+                    <a href="{% url 'add_usuario2' %}" class="botao-grande">Cadastre-se</a>
+                    <a href="{% url 'realizar_login' %}" class="botao-grande">Login</a>
+                </div>
             </div>
-            <div class="col-md-5">
-                <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="{% static 'home/imagens/img_networking.png' %}">
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid cards">
-    <div class="container p-3 border-bottom">
-        <div class="row mt-5 ">
-            <div class="col-lg-4 d-flex flex-column align-items-center text-center ms-0">
-                <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="{% static 'home/imagens/icone_empresario.png' %}">
-                <h2 class="fw-normal text-light">Empresários</h2>
-                <p>Procure ideias inovadoras para agregaar me seu negócio. Saiba mais sobre o universo de possibilidades que você pode encontrar aqui</p>
-                <p><a class="btn btn-secondary" href="#">Mais detalhes &raquo;</a></p>
-            </div>
-            <div class="col-lg-4 d-flex flex-column align-items-center text-center">
-                <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="{% static 'home/imagens/icone_startup.png' %}">
-                <h2 class="fw-normal text-light">Startups</h2>
-                <p>Encontre uma oportunidade para realizar seu sonho. Veja todas as oportunidades que voce pode encontrar aqui.</p>
-                <p><a class="btn btn-secondary" href="#">Mais detalhes &raquo;</a></p>
-            </div>
-            <div class="col-lg-4 d-flex flex-column align-items-center text-center">
-                <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="{% static 'home/imagens/icone_publico_geral.png' %}">
-                <h2 class="fw-normal text-light">Publico geral</h2>
-                <p>Para todos que estão buscando uma nova oportunidade na vida, querendo começar seu proprio negocio, ou encontar um sócio.</p>
+            <div class="col-md-5 text-center">
+                <img class="img-fluid" width="570" height="570" src="{% static 'home/imagens/img_networking.png' %}" alt="Networking">
             </div>
         </div>
     </div>
 </div>
 
+<div class="container-fluid cards middle-page">
+    <div class="p-3 border-bottom">
+        <div class="row mt-0 justify-content-center">
+            <div class="col-lg-4 card-container">
+                <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="{% static 'home/imagens/icone_empresario.png' %}" alt="Empresários">
+                <h2 class="fw-bold text-light mt-3">Empresários</h2>
+                <p>
+                    Descubra startups prontas para inovar. Conheça projetos transformadores que podem dar o próximo passo!
+                </p>
+                <a class="botao-menor1 mt-3" href="#">Explorar ideias &raquo;</a>
+            </div>
+            <div class="col-lg-4 card-container">
+                <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="{% static 'home/imagens/icone_startup.png' %}" alt="Startups">
+                <h2 class="fw-bold text-light mt-3">Startups</h2>
+                <p>
+                    Exponha sua ideia para o mundo! Nossa plataforma conecta você com investidores que acreditam no potencial do seu projeto.
+                </p>
+                <a class="botao-menor2 teste mt-3" href="#">Cadastre seu projeto &raquo;</a>
+            </div>
+            <div class="col-lg-4 card-container">
+                <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="{% static 'home/imagens/icone_publico_geral.png' %}" alt="Público Geral">
+                <h2 class="fw-bold text-light mt-3">Público Geral</h2>
+                <p>
+                    Está começando um negócio ou quer uma nova oportunidade? Encontre parceiros e transforme sonhos em realidade aqui.
+                </p>
+                <a class="botao-menor2 mt-3" href="#">Veja como começar &raquo;</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="sobre-nos text-secondary px-4 py-5 text-center" id="sobre">
+<div class="container-fluid middle-page sobre-nos px-4 py-5 text-center" id="sobre">
     <div class="py-5">
-        <h1 class="display-5 fw-bold text-white">Sobre nós</h1>
-        <div class="col-lg-6 mx-auto">
-            <p class="fs-5 mb-4">Na EnpowerNet, acreditamos no poder das conexões para transformar ideias em grandes realizações. Nossa plataforma digital foi criada para facilitar o relacionamento entre pequenos empreendedores, startups e grandes investidores, promovendo o crescimento do empreendedorismo de forma inclusiva e sustentável.</p>
+        <h1 class="display-5 fw-bold text-light">SOBRE NÓS</h1>
+        <div class="col-lg-8 mx-auto">
+            <p class="mb-4">
+                Na EnpowerNet, acreditamos no poder das conexões para transformar ideias em grandes realizações. 
+                Nossa plataforma foi criada para facilitar a colaboração entre empreendedores, startups e investidores, 
+                promovendo crescimento econômico inclusivo e sustentável.
+            </p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">INSTAGRAM</button>
-                <button type="button" class="btn btn-outline-light btn-lg px-4">OUTROS PROJETOS</button>
+                <a href="#" class="btn btn-info btn-lg px-4 me-sm-3 fw-bold">Instagram</a>
+                <a href="#" class="btn btn-info2 btn-lg px-4 me-sm-3 fw-bold">Outros projetos</a>
             </div>
         </div>
     </div>

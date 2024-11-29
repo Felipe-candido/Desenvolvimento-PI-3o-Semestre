@@ -25,21 +25,15 @@ class UsuarioManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class usuario(AbstractBaseUser):
-    escolha_genero = (
-        ('F', 'Feminino'),
-        ('M', 'Masculino'),
-        ('I', 'Indefinido'),  
-    )
     UUID = models.CharField(max_length=36, primary_key=True, default=lambda: str(uuid.uuid4()), editable=False) 
     email = models.EmailField(unique=True)
     nome = models.CharField(max_length=255)
-    genero = models.CharField(max_length=1, choices=escolha_genero)
-    telefone = models.CharField(max_length=11)
+    telefone = models.CharField(max_length=11, null=True, blank=True)
     data_nascimento = models.DateField()
     last_login = models.DateTimeField(null=True, blank=True)
     sobre = models.CharField(blank=True, null=True, max_length=500)
-    cidade = models.CharField(max_length=255)
-    estado = models.CharField(max_length=2)
+    cidade = models.CharField(max_length=255, null=True, blank=True)
+    estado = models.CharField(max_length=2, null=True, blank=True)
     foto = models.ImageField(upload_to="foto_usuarios/", null=True, blank=True)
 
     objects = UsuarioManager()

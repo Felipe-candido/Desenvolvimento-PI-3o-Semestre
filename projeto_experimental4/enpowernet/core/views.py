@@ -70,7 +70,9 @@ def perfil(request):
     
     usuario = request.user
     nome_formatado = user_service.formata_nome(request.user.nome)
-    numero_formatado = user_service.formata_numero(request.user.telefone)
+    numero_formatado = request.user.telefone
+    if numero_formatado: 
+        numero_formatado = user_service.formata_numero(request.user.telefone)
     projetos = projeto.objects.filter(user_id=request.user.UUID)
     form = editar_perfil_forms(instance=request.user)
     
