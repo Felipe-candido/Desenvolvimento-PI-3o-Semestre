@@ -1,4 +1,4 @@
-/* Container da barra de progresso */
+
 .progress-bar-container {
     width: 100%; 
     background-color: #f0f0f0; 
@@ -8,7 +8,7 @@
     overflow: hidden; 
 }
 
-/* Barra de progresso padrão (azul) */
+
 .progress-bar {
     height: 100%; 
     background-color: #007bff; 
@@ -16,17 +16,17 @@
     transition: width 1s ease-in-out, background-color 1s ease-in-out; 
 }
 
-/* Barra de progresso com cor amarela (50%+) */
+
 .progress-bar-medium {
     background-color: #ffc107; 
 }
 
-/* Barra de progresso com cor verde (100%) */
+
 .progress-bar-full {
     background-color: #28a745; 
 }
 
-/* Estilo da label de porcentagem */
+
 .progress-bar-label {
     position: absolute;
     top: 50%;
