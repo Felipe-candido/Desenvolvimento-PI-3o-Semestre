@@ -1,5 +1,5 @@
-import qrcode
 import crcmod
+import qrcode
 
 class Payload():
     def __init__(self, nome, chavepix, valor, cidade ,txtId):
@@ -59,9 +59,20 @@ class Payload():
 
 
     def crc16gen(self, payload):
-        crc16 = crcmod.mkCrcFun()
+        crc16 = crcmod.mkCrcFun(poly=0x11021, initCrc=0xFFFF,rev=False, xorOut=0x0000)
+    
+        self.crc16Code = hex(crc16(str(payload).encode('utf-8')))
 
+        print(self.crc16Code)
+
+        payload_completo = f'{payload}{str(self.crc16Code).replace('0x', '').upper().zfill(4)}'
+
+        return payload_completo
+    
+    def qrcodegen(self, payload):
+          self.qrcode = qrcode.make(payload)
+          self.qrcode.save('pixqrcode.png')
 
 if __name__ == '__main__':
-    p = Payload(' Darlan dos santos ', ' darlanj207@gmail.com ', ' 422.00 ', ' Araras ', ' 02 ')
+    p = Payload('Darlan dos santos', 'darlan.junior22@gmail.com', '422.00', 'Araras', 'Cidade de putas02')
     p.PayloadGen()
