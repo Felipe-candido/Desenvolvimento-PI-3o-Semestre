@@ -63,16 +63,21 @@ class Payload():
     
         self.crc16Code = hex(crc16(str(payload).encode('utf-8')))
 
-        print(self.crc16Code)
+        
 
-        payload_completo = f'{payload}{str(self.crc16Code).replace('0x', '').upper().zfill(4)}'
+        self.crc16_format = str(self.crc16Code).replace('0x', '').upper()
 
-        return payload_completo
-    
+        self.payload_retorno = f'{payload}{self.crc16_format}'
+
+        
+        print(self.payload_retorno)
+
+        self.qrcodegen(self.payload_retorno)
+
     def qrcodegen(self, payload):
           self.qrcode = qrcode.make(payload)
           self.qrcode.save('pixqrcode.png')
 
 if __name__ == '__main__':
-    p = Payload('Darlan dos santos', 'darlan.junior22@gmail.com', '422.00', 'Araras', 'Cidade de putas02')
+    p = Payload('Darlan dos santos', 'darlan.junior22@gmail.com', '422.00', 'Araras', 'Cidade02')
     p.PayloadGen()
