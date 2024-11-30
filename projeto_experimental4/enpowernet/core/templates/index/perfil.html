@@ -66,20 +66,19 @@
                 
                 <div id="conteudoProjetos" class="card mt-3" style="display: none; max-width: 70%; margin-left: auto; margin-right: auto;">
                     <div class="card-body">
-                        <h6 class="text-center py-4" style="background: linear-gradient(to right, #0056b3, #003366); color: white; border-radius: 8px; margin-bottom: 20px; max-width: 100%; margin-left: auto; margin-right: auto;">
+                        <h6 class="text-center py-2" style="background: linear-gradient(to right, #0056b3, #003366); color: white; border-radius: 8px; margin-bottom: 20px; max-width: 100%; margin-left: auto; margin-right: auto;">
                             MEUS PROJETOS
                         </h6>
                         <div class="row justify-content-center">
                             {% for projeto in projetos %}
                                 <div class="col-12 col-md-8 custom-margin">
                                     <article class="mb-4 pb-4 text-center mx-auto" style="max-width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
-                                        <a href="#" class="text-decoration-none text-dark">
+                                        <a href="{% url 'ver_projeto' projeto.id_mongo %}" class="text-decoration-none text-dark">
                                             <img src="{{ projeto.projeto_logo.url }}" alt="Post Image" class="img-fluid mb-3 rounded" style="width: 100%; height: 250px; object-fit: cover;">
-                                            <h2 class="h4">{{ projeto.descricao }}</h2>
+                                            <h2 class="h4">{{ projeto.titulo }}</h2>
                                         </a>
                                         <p>{{ projeto.descricao }}</p>
                                         <div class="d-flex justify-content-between text-muted">
-                                            <span>{{ projeto.categoria }}</span>
                                             <span>June 24, 2020</span>
                                         </div>
                                     </article>

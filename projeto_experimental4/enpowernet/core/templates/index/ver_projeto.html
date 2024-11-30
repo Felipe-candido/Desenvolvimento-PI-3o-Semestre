@@ -9,81 +9,75 @@
 
 {% block conteudo %}
     {% if user.is_authenticated %}
-        <div class="container mt-5">
-            <div class="project-title">
-                <h1>DETALHES DO PROJETO</h1>
-            </div>
-            <div class="profile-card card1">
-                <h1>Dono do Projeto:</h1>
-                <div class="align-items-center">
-                    {% if usuario.foto %}
-                        <img src="{{ usuario.foto.url }}" alt="Imagem do Dono" class="profile-img1">
-                    {% else %}
-                        <img src="https://via.placeholder.com/50" alt="Imagem do Dono" class="profile-img1">
-                    {% endif %}
-                    <h1>{{ usuario.nome }}</h1>
-                    <h1 class="profile-details">{{ usuario.sobre }}</h1>
-                </div>
-            </div>
-
-            <div class="linha">
-                <hr>
-            </div>
+    <div class="container mt-5">
         
-            <h2 class="project-title">{{ projeto.titulo}}</h2>
-
-            <div class="linha">
-                <hr>
-            </div>
-
-
-            <div id="projectCarousel" class="carousel slide section-spacing" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    {% for imagem in projeto.imagens.all %}
-                    <div class="carousel-item active">
-                        <img src="{{ imagem.imagem.url }}" alt="Imagem do Projeto">
-                    </div>
-                    {% endfor %}
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Anterior</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Próximo</span>
-                </button>
-            </div>
-        
-        
-            <div class="mt-4">
-                <h2 class="project-text">
-                    {{ projeto.descricao }}
-                </h2>
-            </div>
-            
-            <div class="linha2">
-                <hr>
-            </div>
-
-            
-                <div class="espaco">
-                    <h4>CATEGORIA</h4>
-                </div>
-
-                <div class="categoria">
-                    <ul class="categories-list">
-                        <li>{{ projeto.categoria }}</li>
-                    </ul>
-                </div>
-            
-
-            <div class="linha">
-                <hr>
-            </div>
-
-        
+        <div class="text-center mb-4">
+            <h1 class="project-title">{{ projeto.titulo }}</h1>
+            <p class="text-muted">{{ projeto.data_criacao }}</p>
         </div>
+
+        <div class="row mb-5">
+            <div class="col-md-12"> 
+                <div class="profile-card card shadow-sm">
+                    {% if usuario.foto %}
+                        <img src="{{ usuario.foto.url }}" alt="Imagem do Dono" class="profile-img">
+                    {% else %}
+                        <img src="https://via.placeholder.com/150" alt="Imagem do Dono" class="profile-img">
+                    {% endif %}
+                    <h2>{{ usuario.nome }}</h2>
+                    <p class="text-muted">{{ usuario.sobre }}</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="projectCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for imagem in projeto.imagens.all %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ imagem.imagem.url }}" alt="Imagem do Projeto" class="d-block w-100 carousel-img">
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Próximo</span>
+            </button>
+        </div>
+
+        <!-- Descrição do Projeto -->
+        <div class="project-description mb-5">
+            <h3>Sobre o Projeto</h3>
+            <p>{{ projeto.descricao }}</p>
+        </div>
+
+        <!-- Categorias do Projeto -->
+        <div class="categories mb-5">
+            <h4>Categorias</h4>
+            <ul class="categories-list">
+                <li>{{ projeto.categoria }}</li>
+            </ul>
+        </div>
+
+        <!-- Linha de Separação -->
+        <div class="divider my-5"></div>
+
+        <!-- Comentários -->
+        <div class="comments-section">
+            <h4>Comentários</h4>
+            <div class="comment">
+                <p><strong>João Silva:</strong> Ótimo projeto! Parabéns ao criador.</p>
+            </div>
+            <div class="comment">
+                <p><strong>Ana Souza:</strong> Eu adoro essa ideia, quero saber mais!</p>
+            </div>
+        </div>
+    </div>
     {% else %}
+    <p>Por favor, faça login para ver os detalhes do projeto.</p>
     {% endif %}
 {% endblock %}
