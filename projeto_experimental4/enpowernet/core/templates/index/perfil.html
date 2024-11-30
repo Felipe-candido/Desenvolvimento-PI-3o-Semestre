@@ -10,169 +10,141 @@
 
 {% block conteudo %}
     {% if user.is_authenticated %}
-        <div class="container-fluid mt-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-sidebar">
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-3 text-center">
                             {% if usuario.foto %}
-                            <div class="d-flex justify-content-center">
-                                <img src="{{ usuario.foto.url }}" alt="Foto do Usuário" class="profile-img">
-                            </div>
+                                <img src="{{ usuario.foto.url }}" class="img-fluid rounded-circle profile-img" alt="Foto de Perfil">
                             {% else %}
-                            <div class="d-flex justify-content-center">
-                                <img src="{% static 'perfil/imagens/sem_perfil.png' %}" alt="Foto do Usuário" class="profile-img">
-                            </div>
+                                <img src="https://via.placeholder.com/150" class="img-fluid rounded-circle profile-img" alt="Foto de Perfil">
                             {% endif %}
-                            <h3 class="text-center">{{ nome }}</h3>
-                            <hr>
-                            <h5>Informações de Contato</h5>
-                            <p class="text-muted"><strong>Email:</strong> {{ usuario.email }}</p>
-                            <p class="text-muted"><strong>Telefone:</strong> {{ numero }}</p>
-                            <p class="text-muted"><strong>Cidade:</strong> {{ usuario.cidade }}/{{ usuario.estado }} </p>
-                            <hr>
-                            <h5>Sobre</h5>
-                            <p class="text-muted">
-                                {% if usuario.sobre %}
-                                    {{ usuario.sobre }}
-                                {% else %}
-                                    <p><strong>Adicione uma descrição</strong></p>
-                                {% endif %}
-                            </p>
-                            <div class="d-flex justify-content-center mb-3 botoes">
-                                <button type="button" class="btn btn-primary me-4" data-bs-toggle="modal" data-bs-target="#editar_perfil">
-                                    Editar perfil
-                                </button>
-                                <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'criar_projeto' %}'">
-                                    Criar projeto
-                                </button>
-                            </div> 
                         </div>
-                    </div>
-
-                    <div class="col-md-8">
-                        <h3 class="mb-4 titulo-projetos">Meus projetos </h3>
-
-                
-                        {% for projeto in projetos %}
-                            <div class="project-card">
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ projeto.projeto_logo.url }}" alt="Projeto Logo" class="rounded-circle me-3 project_img">
-                                    <div class="text-card">
-                                        <h5>{{ projeto.titulo }}</h5>
-                                        <p class="text-muted small">{{ projeto.descricao }}</p>
-                                    </div>
-                                </div>
-                                <div class="descricao-card">
-                                    <center>
-                                        <p style="color: black;">{{ projeto.descricao }}</p>
-                                    </center>
-                                </div>
-                                <div class="progress my-2">
-                                    <div class="progress-bar {% if projeto.percentual_projeto >= 75 %}green{% elif projeto.percentual_projeto >= 50 %}yellow{% else %}red{% endif %}" 
-                                         style="width: {{ projeto.percentual_projeto }}%;"></div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <p class="text-primary fw-bold">Meta: {{ projeto.total_investidor }}/{{ projeto.meta_investidor }}</p>
-                                </div>
-                                <div class="botoes-projeto">
-                                    <a href="{% url 'ver_projeto' projeto.id_mongo %}" class="btn btn-warning btn-sm">Detalhes</a>
-                                    <a href="{% url 'excluir_projeto' projeto.id_mongo %}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este projeto?')">Excluir</a>
-                                    <a href="{% url 'editar_projeto' projeto.id_mongo %}" class="btn btn-info">Editar</a>
+                        <div class="col-md-9">
+                            <h3 class="card-title text-primary destaque-titulo">{{ nome }}</h3>
+                            <p class="sobre">{{ usuario.sobre }}</p>
+                            <p class="card-text"><strong>Email:</strong> <span class="text-dark">{{ usuario.email }}</span></p>
+                            <p class="card-text"><strong>Telefone:</strong> <span class="text-dark">{{ numero }}</span></p>
+                            <p class="card-text"><strong>Cidade:</strong> <span class="text-dark">{{ usuario.cidade }}/{{ usuario.estado }}</span></p>
+                            <div class="d-flex justify-content-start mt-3">
+                                
+                                <div class="d-flex gap-3">
+                                    <a href="#" class="btn btn-redes rounded-pill">Visitar site</a>
+                                    <a href="#" class="btn btn-redes rounded-pill">Redes sociais</a>
+                               
+    
+                                
+                                    <button type="button" class="btn btn-redes rounded-pill" data-bs-toggle="modal" data-bs-target="#editar_perfil">
+                                        Editar perfil
+                                    </button>
+                                    <button type="button" class="btn btn-redes rounded-pill" onclick="window.location.href='{% url 'criar_projeto' %}'">
+                                        Criar projeto
+                                    </button>
                                 </div>
                             </div>
-                        {% empty %}
-                            {% comment %} <div class="card project-card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Você não possui projetos</h5>
-                                    <p class="card-text text-muted">hello world</p>
-                                    <a href="#" class="btn btn-warning">Ver Detalhes</a>
-                                </div>
-                            </div> {% endcomment %}
-                            <div class="alert alert-primary d-flex align-items-center" role="alert">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
-                                  <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                </svg>
-                                <div>
-                                    Você não possui projetos
-                                </div>
-                              </div>
-                        {% endfor %}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-
-        {% comment %} EDIÇÃO DAS INFORMAÇÕES DO USUARIO {% endcomment %}
-        <div class="modal fade" id="editar_perfil" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header d-flex justify-content-center">
-                        <h5 class="modal-title" id="TituloModalCentralizado">Alterar informações</h5> 
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" id="btnSobre">Sobre mim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="btnProjetos">Projetos</a>
+                    </li>
+                </ul>
+                
+                <div id="conteudoSobre" class="card mt-3">
+                    <div class="card-body">
+                        <h6>Sobre</h6>
+                        <p>{{ usuario.sobre }}</p>
                     </div>
-                    <div class="modal-body">
-                        <div class="form-section">
-                            <form method="POST" action="{% url 'editar_usuario' %}" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {% for field in form %}
-                                    <div style="margin-bottom: 20px;">
-                                        {{ field.label_tag }}
-                                        {{ field }}
-                                        {% if field.errors %}
-                                            <div class="text-danger">
-                                                {% for error in field.errors %}
-                                                <p>{{ error }}</p>
-                                                {% endfor %}
-                                            </div>
-                                        {% endif %}
+                </div>
+                
+                <div id="conteudoProjetos" class="card mt-3" style="display: none; max-width: 70%; margin-left: auto; margin-right: auto;">
+                    <div class="card-body">
+                        <h6 class="text-center py-4" style="background: linear-gradient(to right, #0056b3, #003366); color: white; border-radius: 8px; margin-bottom: 20px; max-width: 100%; margin-left: auto; margin-right: auto;">
+                            MEUS PROJETOS
+                        </h6>
+                        <div class="row justify-content-center">
+                            {% for projeto in projetos %}
+                                <div class="col-12 col-md-8 custom-margin">
+                                    <article class="mb-4 pb-4 text-center mx-auto" style="max-width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+                                        <a href="#" class="text-decoration-none text-dark">
+                                            <img src="{{ projeto.projeto_logo.url }}" alt="Post Image" class="img-fluid mb-3 rounded" style="width: 100%; height: 250px; object-fit: cover;">
+                                            <h2 class="h4">{{ projeto.descricao }}</h2>
+                                        </a>
+                                        <p>{{ projeto.descricao }}</p>
+                                        <div class="d-flex justify-content-between text-muted">
+                                            <span>{{ projeto.categoria }}</span>
+                                            <span>June 24, 2020</span>
                                         </div>
-                                {% endfor %}
-                                <div class="modal-footer">
-                                    <input type="submit" class="btn-edit" value="Salvar mudanças">
+                                    </article>
                                 </div>
-                            </form>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+
+    <div class="modal fade" id="editar_perfil" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-center">
+                    <h5 class="modal-title" id="TituloModalCentralizado">Alterar informações</h5> 
+                </div>
+                <div class="modal-body">
+                    <div class="form-section">
+                        <form method="POST" action="{% url 'editar_usuario' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <div style="margin-bottom: 20px;">
+                                    {{ field.label_tag }}
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        <div class="text-danger">
+                                            {% for error in field.errors %}
+                                            <p>{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                    </div>
+                            {% endfor %}
+                            <div class="modal-footer">
+                                <input type="submit" class="btn-edit" value="Salvar mudanças">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('btnSobre').addEventListener('click', function() {
+            document.getElementById('conteudoSobre').style.display = 'block'; 
+            document.getElementById('conteudoProjetos').style.display = 'none'; 
+            document.getElementById('btnSobre').classList.add('active');  
+            document.getElementById('btnProjetos').classList.remove('active'); 
+        });
+    
+        document.getElementById('btnProjetos').addEventListener('click', function() {
+            document.getElementById('conteudoSobre').style.display = 'none'; 
+            document.getElementById('conteudoProjetos').style.display = 'block'; 
+            document.getElementById('btnProjetos').classList.add('active');  
+            document.getElementById('btnSobre').classList.remove('active'); 
+        });
+    </script>
 
     {% else %}
     <p>Você precisa estar logado para ver esta página.</p>
     {% endif %}
 {% endblock %}
-
 {% block js_extra %}
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    // Seleciona todos os botões "Ver Mais"
-    const buttons = document.querySelectorAll(".ver-mais");
-
-    // Adiciona evento a cada botão
-    buttons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            // Obtém o ID da descrição vinculada
-            const id = button.getAttribute("data-id");
-            const descricao = document.getElementById(`descricao-${id}`);
-
-            // Verifica se a descrição existe
-            if (descricao) {
-                // Alterna entre expandido/contraído
-                if (descricao.classList.contains("expandida")) {
-                    descricao.classList.remove("expandida");
-                    button.textContent = "Ver Mais";
-                } else {
-                    descricao.classList.add("expandida");
-                    button.textContent = "Ver Menos";
-                }
-            } else {
-                console.error(`Elemento descrição não encontrado: descricao-${id}`);
-            }
-        });
-    });
-});
-</script>
-
 {% endblock %}
-
