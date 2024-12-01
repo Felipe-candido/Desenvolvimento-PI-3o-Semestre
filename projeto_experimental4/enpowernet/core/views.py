@@ -9,7 +9,7 @@ from datetime import date
 from django.utils import timezone
 from decimal import Decimal, InvalidOperation
 from .services import user_service
-from core.forms import cadastro_forms, editar_perfil_forms, projeto_forms, editar_projeto_forms, imagens
+from core.forms import cadastro_forms, editar_perfil_forms, projeto_forms, editar_projeto_forms, imagens, forms_login
 import uuid
 from django.contrib.sessions.models import Session
 from enpowernet.settings import MONGO_URI  
@@ -31,7 +31,7 @@ def add_usuario2(request):
             user.set_password(form.cleaned_data['senha'])
             user.save()
             messages.success(request, "Usuário registrado com sucesso!")
-            return redirect('/')
+            return redirect('home')
         
         context = {'form': form}
         return render(request, 'registro.html', context) 
@@ -42,21 +42,32 @@ def add_usuario2(request):
 
 def realizar_login(request):
     if request.method == 'POST':
-        email = request.POST.get("email")
-        senha = request.POST.get("senha")
+        form = forms_login(request.POST)
+        
+        if form.is_valid():
 
-        user = authenticate(request, email=email, password=senha)
+            email = form.cleaned_data['email']
+            senha = form.cleaned_data['senha']
 
-        if user is not None:
-            user.last_login = timezone.now()
-            user.save(update_fields=['last_login'])
-            login(request, user)
-            return redirect("/")  
-        else:
-            messages.error(request, "E-Mail ou Senha inválidos, tente novamente!")
-            return redirect('realizar_login')  
+            user = authenticate(request, email=email, password=senha)
 
-    return render(request, 'login.html')
+            if user is not None:
+                user.last_login = timezone.now()
+                user.save(update_fields=['last_login'])
+                login(request, user)
+                return redirect("/projetos")  
+            messages.error(request, "E-mail ou senha inválidos. Tente novamente.") 
+            
+
+        context = {'form': form}
+        return render(request, 'login.html', context) 
+         
+
+    form = forms_login(request.POST)
+    context = {'form': form}
+    return render(request, 'login.html', context) 
+
+
 
 def logout(request):
     Session.objects.all().delete()

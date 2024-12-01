@@ -9,28 +9,42 @@
     <link rel="stylesheet" href="{% static "login/css/login.css" %}">
 </head>
 <body>
-        <div class="container">
 
-            <div class="container_top">
-                <a href="{% url 'home' %}">
-                    <button class="btn-voltar">Voltar</button>
-                </a>
-                <img src="{% static "login/img/logo_login.jpg" %}" alt="logo" width="600" >
-            </div>
+    <div class="container">
 
-            <div class="form-section">
-                <h3>ENPOWERNET</h3>
-                <form method="POST" action="{% url 'realizar_login' %}">
-                    {% csrf_token %}
-                    <input type="email" name="email" id="email" placeholder="Email" class="form-control" required>
-                    <input type="password" name="senha" id="senha" class="form-control" placeholder="Senha" required>
-                    <button type="submit" class="btn-login">LOGIN</button>
-                </form>
-                <div class="form-footer">
-                    <label><input type="checkbox"> Remember</label>
-                    <p>Não tem uma conta? <a href="{% url 'add_usuario2' %}">Registre-se aqui</a>.</p>
-                </div>
+        <div class="container_top">
+            <a href="{% url 'home' %}">
+                <button class="btn-voltar">Voltar</button>
+            </a>
+            <img src="{% static "login/img/logo_login.jpg" %}" alt="logo" width="600" >
+        </div>
+
+        <div class="form-section">
+            <h3>ENPOWERNET</h3>
+            <form method="POST" action="{% url 'realizar_login' %}">
+                {% csrf_token %}
+                <label class="form-label">{{ form.email.label }}</label>
+                {{ form.email }}
+     
+
+                <label class="form-label">{{ form.senha.label }}</label>
+                {{ form.senha }}
+
+                <input type="submit" class="btn-login" value="ENTRAR">
+            </form>
+            <div class="form-footer">
+                <label><input type="checkbox"> Remember</label>
+                <p>Não tem uma conta? <a href="{% url 'add_usuario2' %}">Registre-se aqui</a>.</p>
             </div>
         </div>
+    </div>
+
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+                alert("{{ message|escapejs }}");
+            {% endfor %}
+        {% endif %}
+    </script>
 </body>
 </html>

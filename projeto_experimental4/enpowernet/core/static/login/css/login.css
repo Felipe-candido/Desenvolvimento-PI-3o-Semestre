@@ -7,6 +7,11 @@ body{
     margin: 0;
 }
 
+.form-label{
+    display: flex;
+    margin-left: 10px;
+}
+
 .btn-voltar{
     align-items: end;
     width: 100%;

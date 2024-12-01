@@ -7,6 +7,19 @@ body{
     margin: 0;
 }
 
+.form-label{
+    display: flex;
+    margin-left: 10px;
+}
+
+.text-danger{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+
+
 .btn-voltar{
     align-items: end;
     width: 100%;

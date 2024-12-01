@@ -20,21 +20,24 @@ class cadastro_forms(forms.ModelForm):
     class Meta:
         model = usuario
         fields = ["email", "nome", "data_nascimento", "senha"]
+        labels = {'email': 'Email',
+                  'nome': 'Nome', 
+                  'data_nascimento': 'Data de nascimento', 
+                  'senha': 'Senha'}
         widgets = {
             'data_nascimento': forms.DateInput(attrs={
                 'type': 'date',
                 'class': 'form-control',
-                'placeholder': 'Nome',
                 'required': 'required',
                 }),
             'nome': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Nome',
+                'placeholder': 'Nome completo',
                 'required': 'required',
                 }),
             'email': forms.EmailInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Email',
+                'placeholder': 'exemplo@mail.com',
                 'required': 'required',
                 }),
         }
@@ -259,3 +262,18 @@ class editar_projeto_forms(forms.ModelForm):
     def clean_titulo(self):
         titulo = self.cleaned_data['titulo']
         return str(titulo).title()
+    
+    
+class forms_login(forms.Form):
+    email = forms.EmailField(
+        label="E-mail",
+        widget=forms.EmailInput(attrs={'placeholder': 'Digite seu e-mail', 'class': 'form-control'}),
+    )
+    senha = forms.CharField(
+        label="Senha",
+        widget=forms.PasswordInput(attrs={'placeholder': 'Digite sua senha', 'class': 'form-control'}),
+    )   
+            
+            
+            
+    
