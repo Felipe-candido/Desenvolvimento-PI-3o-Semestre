@@ -15,6 +15,11 @@ body {
 
 .nav-link{
     color: #efe6e6;
+    a{
+        text-decoration: none;
+        transition: none !important; 
+        animation: none !important;
+    }
 }
 
 .nav{
@@ -27,7 +32,13 @@ body {
 
 .navbar .nav-link {
     padding: 0.25rem 0.75rem; 
-    font-size: 0.9rem; 
+    font-size: 0.9rem;
+    transition: none;
+    a{
+        text-decoration: none;
+        transition: none !important; 
+        animation: none !important;
+    }
 }
 
 .btn {

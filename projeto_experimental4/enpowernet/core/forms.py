@@ -78,11 +78,15 @@ class cadastro_forms(forms.ModelForm):
 class editar_perfil_forms(forms.ModelForm): 
     class Meta:
         model = usuario
-        fields = ["nome", "telefone", "sobre", "cidade", "estado", "foto"]
+        fields = ["nome", "telefone", "descricao", "cidade", "estado", "foto", "sobre"]
         labels = {
             'nome': 'Nome Completo',
             'telefone': 'Telefone de Contato',
-            'sobre': 'Sobre Você',
+            'descricao': 'Breve descrição',
+            'cidade': 'Cidade',
+            'estado': 'Estado',
+            'foto': 'Foto do perfil',
+            'sobre': 'Sobre mim',
         }
         widgets = {
             'nome': forms.TextInput(attrs={
@@ -94,7 +98,7 @@ class editar_perfil_forms(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Telefone',
             }),
-            'sobre': forms.TextInput(attrs={
+            'descricao': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'sobre',
             }),
@@ -108,6 +112,10 @@ class editar_perfil_forms(forms.ModelForm):
             }),
             'foto': forms.FileInput(attrs={
             'class': 'form-control',
+            }),
+            'sobre': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Fale mais sobre você(cursos, formação, etc...)',
             }),
         }
         
@@ -161,7 +169,7 @@ class projeto_forms(forms.ModelForm):
      
     class Meta:
         model = projeto
-        fields = ("titulo", "descricao", "meta_investidor",  "projeto_logo", "categoria")
+        fields = ("titulo", "descricao", "meta_investidor",  "projeto_logo", "categoria", "sobre")
         labels = {
             'titulo': 'Nome do projeto',
             'descrição': 'Sobre o projeto',
@@ -170,23 +178,26 @@ class projeto_forms(forms.ModelForm):
         widgets = {
             'titulo': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Titulo do projeto',
+                'placeholder': 'Titulo',
                 'required': 'required',
             }),
             'descricao': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Descrição do projeto',
+                'placeholder': 'Breve descrição',
                 'required': 'required',
             }),
             'meta_investidor': forms.NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Meta de investimento',
+                'placeholder': 'Meta',
                 'step': '0.01',
             }),
             'projeto_logo': forms.FileInput(attrs={
                 'class': 'form-control',
             }),
-            
+            'sobre': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Fale mais sobre o projeto(objetivos, impactos, etc...)',
+            }),
         }
         
         def clean_titulo(self):

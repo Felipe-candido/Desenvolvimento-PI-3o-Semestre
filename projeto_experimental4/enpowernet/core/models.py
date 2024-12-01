@@ -31,10 +31,11 @@ class usuario(AbstractBaseUser):
     telefone = models.CharField(max_length=11, null=True, blank=True)
     data_nascimento = models.DateField()
     last_login = models.DateTimeField(null=True, blank=True)
-    sobre = models.CharField(blank=True, null=True, max_length=500)
+    descricao = models.CharField(blank=True, null=True, max_length=50)
     cidade = models.CharField(max_length=255, null=True, blank=True)
     estado = models.CharField(max_length=2, null=True, blank=True)
     foto = models.ImageField(upload_to="foto_usuarios/", null=True, blank=True)
+    sobre = models.TextField(blank=True, null=True)
 
     objects = UsuarioManager()
 
@@ -67,8 +68,8 @@ class projeto(models.Model):
     total_investidor = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  
     data_criacao = models.DateTimeField(auto_now_add=True) 
     projeto_logo = models.ImageField(upload_to="projeto/")
-    texto_sobre = models.CharField(max_length=9999)
     categoria = models.CharField(max_length=20, choices=escolha_categoria)
+    sobre = models.TextField(blank=True, null=True)
 
 
     def __str__(self):

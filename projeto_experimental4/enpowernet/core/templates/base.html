@@ -20,13 +20,22 @@
                     <img src="{% static 'home/imagens/icone-logo.png' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top d-flex">
                     <span class="ms-2">ENPOWERNET</span>
                 </a>
-
+                
+                {% if user.is_authenticated %}
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" aria-current="page">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" aria-current="page">Projetos</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Contatos</a></li>
                     <li class="nav-item"><a href="#sobre" class="nav-link">Sobre </a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+
                 </ul>
+
+                {% else %}
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a href="#" id="projetoID" class="nav-link" aria-current="page" onclick="erro()">Projetos</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contatos</a></li>
+                    <li class="nav-item"><a href="#sobre" class="nav-link">Sobre </a></li>
+                </ul>
+                {% endif %}
 
                 <div class="text-end">
                     {% if user.is_authenticated %}
@@ -48,6 +57,13 @@
             </div>
         </div>
     </nav>
+
+    <script>
+        document.getElementById("projetoID").addEventListener("click", function(event) {
+            event.preventDefault();  
+            alert("Você precisa entrar com sua conta para ver essa página");
+        });
+    </script>
 
     {% block conteudo %}{% endblock %}
 

@@ -1,16 +1,21 @@
-body {
-    background-color: #f8f9fa;
+.container-projeto {
+    background: linear-gradient(135deg, #012a4a, #01497c, #00608a, #0173b1);
 }
 
-.projeto{
-    margin-top: 100px;
+.shadow{
+    margin-bottom: 30px;
+}
+
+.projeto {
+    margin-top: 50px;
     width: 1000px;
 }
+
 .form-label {
     font-weight: bold;
 }
 
-.form1{
+.form1 {
     margin-top: 30px;
 }
 
@@ -19,7 +24,35 @@ body {
     background-color: #28a745;
     color: white;
     font-weight: bold;
+    padding: 15px 20px;
+    font-size: 20px;
 }
+
 .submit-btn:hover {
     background-color: #218838;
+}
+
+body {
+    background: linear-gradient(135deg, #012a4a, #01497c, #00608a, #0173b1);
+    color: #ffff;
+    width: 100%;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.text-center {
+    margin: 0;
+    padding: 0;
+}
+
+.card-body {
+    margin-bottom: 30px;
+}
+
+.card {
+    margin-bottom: 300px !important;
 }

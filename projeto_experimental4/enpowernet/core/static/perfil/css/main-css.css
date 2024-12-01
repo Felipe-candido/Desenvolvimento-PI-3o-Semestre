@@ -53,7 +53,7 @@ hr {
 }
 
 .nav-tabs .nav-link {
-    color: #007bff; 
+    color: #ffffff;
     font-weight: bold;
 }
 
@@ -78,13 +78,13 @@ hr {
 }
 
 .sobre{
-    font-size: 20px;
+    font-size: 25px;
     line-height: 1.6;
-    color: #495057;
+    color: #000000;
 }
 
 .card-text {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.6;
     color: #495057;
 }
@@ -94,7 +94,7 @@ hr {
 }
 
 .btn-redes {
-    background: linear-gradient(to right, #0056b3, #003366);
+    background: linear-gradient(to right, #f27025, #f2a63e);
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -105,26 +105,12 @@ hr {
 }
 
 .btn-redes:hover {
-    background-color: #0056b3; 
+    background: linear-gradient(to right, #f27025, #f2a63e); 
     box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
-    transform: scale(1.05);
+    transform: scale(1.01);
 }
 
-.btn-outline-primary {
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 8px 18px;
-    border: 2px solid #007bff;
-    color: #007bff;
-    transition: all 0.3s ease;
-}
 
-.btn-outline-primary:hover {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
-}
 
 .btn-sm {
     padding: 0.5rem 1.5rem; 
@@ -144,9 +130,14 @@ hr {
     justify-content: flex-start;
 }
 
+html, body {
+    height: 100%; 
+    margin: 0; 
+}
+
 body {
-    background-color: #f0f4f8; 
     color: #212529;
+    background: linear-gradient(135deg, #012a4a, #01497c, #00608a, #0173b1);
 }
 
 

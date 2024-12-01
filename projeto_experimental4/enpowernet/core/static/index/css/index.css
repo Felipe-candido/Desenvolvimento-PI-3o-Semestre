@@ -17,6 +17,11 @@ body {
 .navbar .nav-link {
     padding: 0.25rem 0.75rem; 
     font-size: 1rem;
+    a{
+        text-decoration: none;
+        transition: none !important; 
+        animation: none !important;
+    }
 }
 
 h2 {

@@ -6,51 +6,59 @@
 <link rel="stylesheet" href="{% static 'criar_projeto/css/main-css.css' %}">
 {% endblock %}
 
-
 {% block conteudo %}
-
 <div class="container projeto">
     <h2 class="text-center mb-4">Criar Novo Projeto</h2>
-    <div class="card shadow">
+    <div class="card">
         <div class="card-body">
             <form method="POST" action="{% url 'criar_projeto' %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label for="titulo" class="form-label">Nome do Projeto</label>
-                    {{ form.titulo}}
-                </div>
-                <div class="form-group">
-                    <label for="descricao" class="form-label form1">Descrição do Projeto</label>
-                    {{ form.descricao }}
-                </div>
-                <div class="form-group">
-                    <label for="metaInvestimento" class="form-label form1">Meta de Investimento (R$)</label>
-                    {{ form.meta_investidor}}
-                </div>
-                <div class="form-group">
-                    <label for="descricao" class="form-label form1">Logo</label>
-                    {{ form.projeto_logo }}
-                </div>
-                <div class="form-group">
-                    <label for="descricao" class="form-label form1">Imagens do projeto</label>
-                    <div class="form-control">
-                        <input type="file" name="imagens" multiple>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="titulo" class="form-label">Nome do Projeto</label>
+                            {{ form.titulo }}
+                        </div>
+                        <div class="form-group">
+                            <label for="descricao" class="form-label form1">Descrição do Projeto</label>
+                            {{ form.descricao }}
+                        </div>
+                        <div class="form-group">
+                            <label for="metaInvestimento" class="form-label form1">Meta de Investimento (R$)</label>
+                            {{ form.meta_investidor }}
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="projeto_logo" class="form-label form">Logo</label>
+                            {{ form.projeto_logo }}
+                        </div>
+                        <div class="form-group">
+                            <label for="imagens" class="form-label form1">Imagens do projeto</label>
+                            <input type="file" name="imagens" multiple class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="categoria" class="form-label form1">Categoria</label>
+                            {{ form.categoria }}
+                        </div>
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="descricao" class="form-label form1">Categoria</label>
-                    {{ form.categoria }}
+                    <label for="descricao" class="form-label form1">Sobre o projeto</label>
+                    {{ form.sobre }}
                 </div>
+
                 <button type="submit" class="btn submit-btn btn-block">Criar Projeto</button>
             </form>
         </div>
     </div>
 </div>
 
-
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-</body>
-</html>
 {% endblock %}
