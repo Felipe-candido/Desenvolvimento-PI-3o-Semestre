@@ -1,7 +1,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f7f7f7;
+    background-color: #f1f8ff;
     color: #333;
 }
 
@@ -23,6 +23,11 @@ body {
     flex-direction: column;
     align-items: center; 
     justify-content: center;  
+}
+
+.text-descricao{
+    font-size: 20px;
+    color: #333;
 }
 
 .profile-card .profile-img {
@@ -93,6 +98,7 @@ body {
     color: #333;
     text-transform: uppercase;
     letter-spacing: 2px;
+    margin-bottom: 0;
 }
 
 .text-muted {
@@ -113,36 +119,60 @@ body {
 }
 
 
-.project-description h3,
-.categories h4 {
-    font-size: 28px;
+.project-description h3 {
+    font-size: 40px;
     font-weight: 600;
     color: #003366;
     margin-bottom: 15px;
+    display: flex;
+}
+
+.categories h4 {
+    font-size: 40px;
+    font-weight: 600;
+    color: #003366;
+    margin-bottom: 15px;
+    display: flex;
 }
 
 .project-description p,
 .categories-list li {
-    font-size: 18px;
-    color: #555;
+    font-size: 23px;
+    color: #303030;
     line-height: 1.6;
+    display: flex;
+}
+
+.project-description p, .h3{
+    display: flex;
 }
 
 
 .categories-list {
     list-style-type: none;
     padding: 0;
-    display: inline-block;  
+    display: flex;  
 }
 
 .categories-list li {
     background-color: #e9b421;
     color: #fff;
-    padding: 10px;
-    border-radius: 20px;
+    padding: 10px 50px;
+    border-radius: 5px;
     margin: 5px 0;
-    display: inline-block;
-    font-size: 16px;
+    display: flex;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+
+
+#projectCarousel {
+    border: 3px solid #003366;
+    border-radius: 10px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 10px; 
 }
 
 
@@ -151,7 +181,21 @@ body {
     height: 450px;
     object-fit: cover;
     border-radius: 10px;
+    border: 3px solid #003366; 
 }
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #003366; 
+}
+
+
+.carousel-item {
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
+}
+
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {

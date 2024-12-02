@@ -9,10 +9,15 @@
 
 {% block conteudo %}
     {% if user.is_authenticated %}
-    <div class="container mt-5">
+    <div class="container mt3">
+        <center>
+
+            <h1 style="margin: 20px;">DE/TALHES DO PROJETO</h1>
+        </center>
         
         <div class="text-center mb-4">
             <h1 class="project-title">{{ projeto.titulo }}</h1>
+            <p class="text-descricao">{{ projeto.descricao }}</p>
             <p class="text-muted">{{ projeto.data_criacao }}</p>
         </div>
 
@@ -49,13 +54,13 @@
             </button>
         </div>
 
-        <!-- Descrição do Projeto -->
+   
         <div class="project-description mb-5">
-            <h3>Sobre o Projeto</h3>
-            <p>{{ projeto.descricao }}</p>
+            <h3>SOBRE O PROJETO</h3>
+            <p>{{ projeto.sobre }}</p>
         </div>
 
-        <!-- Categorias do Projeto -->
+  
         <div class="categories mb-5">
             <h4>Categorias</h4>
             <ul class="categories-list">
@@ -63,10 +68,10 @@
             </ul>
         </div>
 
-        <!-- Linha de Separação -->
+   
         <div class="divider my-5"></div>
 
-        <!-- Comentários -->
+      
         <div class="comments-section">
             <h4>Comentários</h4>
             <div class="comment">

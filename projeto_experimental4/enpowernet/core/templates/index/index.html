@@ -64,7 +64,7 @@
             <div class="col-12 col-md-6 custom-margin">
                 {% for projeto in projetos %}
                 <article class="mb-4 project-card text-center mx-auto" style="max-width: 600px;">
-                    <a href="#" class="text-decoration-none text-dark">
+                    <a href="{% url 'ver_projeto' projeto.id_mongo %}" class="text-decoration-none text-dark">
                         <div class="project-image-container">
                             <img src="{{ projeto.projeto_logo.url }}" alt="Post Image" class="img-fluid project-image rounded">
                         </div>
