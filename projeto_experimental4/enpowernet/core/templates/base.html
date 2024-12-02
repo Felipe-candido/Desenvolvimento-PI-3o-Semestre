@@ -41,7 +41,8 @@
                 <div class="text-end">
                     {% if user.is_authenticated %}
                         <div class="btn-group">
-                            <div type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{% static 'perfil/imagens/sem_perfil.png' %}" width="38" height="38" alt="..." class="rounded-circle"></div>
+                            <div type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src='{{ user.foto.url }}' width="38" height="38" alt="..." class="rounded-circle"></div>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><button class="dropdown-item" type="button" onclick="window.location.href='{% url 'perfil' %}'">Perfil</button></li>
                                 <li><button class="dropdown-item" type="button" onclick="window.location.href='{% url 'logout' %}'">Logout</button>

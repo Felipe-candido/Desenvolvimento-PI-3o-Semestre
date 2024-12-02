@@ -9,7 +9,7 @@ from datetime import date
 from django.utils import timezone
 from decimal import Decimal, InvalidOperation
 from .services import user_service
-from core.forms import cadastro_forms, editar_perfil_forms, projeto_forms, editar_projeto_forms, imagens, forms_login
+from core.forms import cadastro_forms, editar_perfil_forms, projeto_forms, editar_projeto_forms, imagens, forms_login, forms_comentarios
 import uuid
 from django.contrib.sessions.models import Session
 from enpowernet.settings import MONGO_URI  
@@ -246,15 +246,42 @@ def editar_projeto(request, projeto_id):
 
 
 def ver_projeto(request, projeto_id):
-
     Projeto = get_object_or_404(projeto, id_mongo=projeto_id)
     Usuario = get_object_or_404(usuario, UUID=Projeto.user_id)
+    form = forms_comentarios()
+    Comentarios = Projeto.comentarios.all()  
+
+    context = {
+        "usuario": Usuario,
+        "projeto": Projeto, 
+        "comentarios": Comentarios,
+        "form": form
+    }
+    return render(request, 'index/ver_projeto.html', context)
+
+
+def adicionar_comentario(request, projeto_id):
+    Projeto = get_object_or_404(projeto, id_mongo=projeto_id)  
+    Usuario = get_object_or_404(usuario, UUID=Projeto.user_id)
+
+    if request.method == 'POST':
+        form = forms_comentarios(request.POST)
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.usuario = request.user
+            comentario.projeto = Projeto
+            comentario.save()
+            return redirect('ver_projeto', projeto_id=projeto_id)  
+    else:
+        form = forms_comentarios()
 
     context = {
         "usuario": Usuario,
         "projeto": Projeto,
+        "form": form,
     }
     return render(request, 'index/ver_projeto.html', context)
+
     
 
 

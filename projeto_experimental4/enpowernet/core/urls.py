@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 from . import views
-from .views import  realizar_login, logout, add_usuario2, perfil, editar_usuario, index, excluir_projeto, editar_projeto, ver_projeto
+from .views import  realizar_login, logout, add_usuario2, perfil, editar_usuario, index, excluir_projeto, editar_projeto, ver_projeto, adicionar_comentario
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -15,5 +15,6 @@ urlpatterns = [
     path('excluir_projeto/<str:projeto_id>/', excluir_projeto, name='excluir_projeto'),
     path('editar_projeto/<str:projeto_id>/', editar_projeto, name='editar_projeto'),
     path('projeto/<str:projeto_id>/', ver_projeto, name='ver_projeto'),
+    path('projeto/<str:projeto_id>/adicionar_comentario/', adicionar_comentario, name='adicionar_comentario'),
 
 ]

@@ -113,3 +113,13 @@ class imagens(models.Model):
     
     def __str__(self):
         return f"Imagem de {self.projeto.titulo}"
+
+
+class comentarios(models.Model):
+    projeto = models.ForeignKey(projeto, related_name="comentarios", on_delete=models.CASCADE)
+    usuario = models.ForeignKey(usuario, related_name="comentarios", on_delete=models.CASCADE)
+    texto = models.TextField()
+    data_comentario = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f'Comentário de {self.usuario} sobre {self.projeto.titulo}'

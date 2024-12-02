@@ -2,7 +2,7 @@ from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from unicodedata import numeric
 from django import forms 
-from .models import usuario, projeto, imagens
+from .models import usuario, projeto, imagens, comentarios
 from django.core.exceptions import ValidationError
 from datetime import date
 from bson import Decimal128, ObjectId
@@ -225,7 +225,7 @@ class imagens_forms(forms.ModelForm):
 class editar_projeto_forms(forms.ModelForm):
     class Meta:
         model = projeto
-        fields = ['titulo', 'descricao', 'meta_investidor', 'projeto_logo']
+        fields = ['titulo', 'descricao', 'meta_investidor', 'projeto_logo', 'sobre']
         labels = {
             'titulo': 'Nome do projeto',
             'descrição': 'Sobre o projeto',
@@ -247,6 +247,10 @@ class editar_projeto_forms(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Meta de investimento',
                 'step': '0.01',
+            }),
+            'sobre': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Fale mais sobre o projeto(objetivos, impactos, etc...)',
             }),
         }
 
@@ -284,7 +288,18 @@ class forms_login(forms.Form):
         label="Senha",
         widget=forms.PasswordInput(attrs={'placeholder': 'Digite sua senha', 'class': 'form-control'}),
     )   
-            
+    
+    
+class forms_comentarios(forms.ModelForm):
+    class Meta:
+        model = comentarios
+        fields = ['texto']
+        widgets = {
+        'sobre': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Fale mais sobre o projeto(objetivos, impactos, etc...)',
+            }),
+        }
             
             
     

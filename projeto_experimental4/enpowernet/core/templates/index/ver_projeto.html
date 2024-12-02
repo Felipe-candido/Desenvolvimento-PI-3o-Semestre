@@ -74,15 +74,56 @@
       
         <div class="comments-section">
             <h4>Comentários</h4>
-            <div class="comment">
-                <p><strong>João Silva:</strong> Ótimo projeto! Parabéns ao criador.</p>
-            </div>
-            <div class="comment">
-                <p><strong>Ana Souza:</strong> Eu adoro essa ideia, quero saber mais!</p>
-            </div>
+            {% if comentarios %}
+                {% for comentario in comentarios %}
+                    <div class="comment">
+                        <p>
+                            <strong>{{ comentario.usuario.nome }}:</strong> {{ comentario.texto }}
+                        </p>
+                        <p class="text-muted">
+                            Publicado em: {{ comentario.data_comentario|date:"d/m/Y H:i" }}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Seja o primeiro a comentar!</p>
+            {% endif %}
         </div>
+        
+        <button class="btn btn-primary" id="addCommentBtn" onclick="showCommentBox()">Adicionar Comentário</button>
+    
+        <div id="commentBox" class="mt-3" style="display: none;">
+            <form method="POST" action="{% url 'adicionar_comentario' projeto.id_mongo %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Enviar Comentário</button>
+            </form>
+        </div>
+    </div>
+    
+    
     </div>
     {% else %}
     <p>Por favor, faça login para ver os detalhes do projeto.</p>
     {% endif %}
+    {% block javascript_extra %}
+    <script>
+        
+        function showCommentBox() {
+            document.getElementById('commentBox').style.display = 'block';
+            document.getElementById('addCommentBtn').style.display = 'none'; 
+        }
+    
+       
+        function submitComment() {
+            const commentText = document.getElementById('commentText').value;
+            if (commentText.trim() !== "") {
+                alert("Comentário enviado: " + commentText);
+            } else {
+                alert("Por favor, escreva um comentário antes de enviar.");
+            }
+        }
+    </script>
+{% endblock %}
+
 {% endblock %}
