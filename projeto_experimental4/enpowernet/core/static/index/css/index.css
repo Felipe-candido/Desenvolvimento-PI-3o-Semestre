@@ -220,12 +220,10 @@ footer{
 
 
 .stats-card {
-    border: none;
-    border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    background: linear-gradient(135deg, #012a4a, #013961, #004461, #002235);
-    color: white;
+    background-color: #ffffff;
+    color: rgb(54, 54, 54);
 }
 .stats-card h3, .stats-card h4 {
     margin: 0;
@@ -234,4 +232,3 @@ footer{
 .stats-card .stat-item:last-child {
     margin-bottom: 0;
 }
-
