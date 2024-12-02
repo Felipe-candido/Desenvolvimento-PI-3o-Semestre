@@ -10,30 +10,42 @@
 {% block conteudo %}
 
 {% if user.is_authenticated %}
-    <div class="bg-dark text-white py-3">
+    <div class="card-header py-3">
         <div class="container text-center">
-            <h1 class="mb-0">ENPOWERNET</h1>
-            <p class="lead">Principais projetos no mundo dos empreendimentos</p>
+            <p class="lead">Encontre as melhores oportunidades</p>
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
+    <div class="container mt-5">
+        <div class="card stats-card text-center">
+            <h3 class="mb-4">Estatísticas do Site</h3>
+            <div class="row">
+                <div class="col-md-4 stat-item">
+                    <h4>Projetos Ativos</h4>
+                    <p class="display-5">{{ total_projetos }}</p>
+                </div>
+                <div class="col-md-4 stat-item">
+                    <h4>Arrecadação</h4>
+                    <p class="display-5">$2.5M</p>
+                </div>
+                <div class="col-md-4 stat-item">
+                    <h4>Apoiadores</h4>
+                    <p class="display-5">18.2K</p>
+                </div>
+            </div>
         </div>
-    </nav>
-    <main class="container py-5">
+    </div>
+
+    <main class="container-fluid py-5">
         <div class="row">
             <aside class="col-12 col-md-3 custom-margin">
                 <div class="card">
                     <div class="card-header bg-primary text-white">
-                        Categories & Search
+                        Categorias e pesquisar
                     </div>
                     <div class="card-body">
                         <form class="input-group mb-4" method="GET">
-                            <input type="text" class="form-control" name="query" placeholder="Search..." aria-label="Search">
+                            <input type="text" class="form-control" name="query" placeholder="pesquisar..." aria-label="Search">
                             <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -52,17 +64,33 @@
 
             <div class="col-12 col-md-6 custom-margin">
                 {% for projeto in projetos %}
-                    <article class="mb-4 border-bottom pb-4 text-center mx-auto" style="max-width: 600px;">
-                        <a href="#" class="text-decoration-none text-dark">
-                            <img src="{{ projeto.projeto_logo.url }}" alt="Post Image" class="img-fluid mb-3 rounded">
-                            <h2 class="h4">{{ projeto.descricao }}</h2>
-                        </a>
-                        <p>{{ projeto.descricao }}</p>
-                        <div class="d-flex justify-content-between text-muted">
-                            <span>{{ projeto.categoria }}</span>
-                            <span>June 24, 2020</span>
+                <article class="mb-4 project-card text-center mx-auto" style="max-width: 600px;">
+                    <a href="#" class="text-decoration-none text-dark">
+                        <div class="project-image-container">
+                            <img src="{{ projeto.projeto_logo.url }}" alt="Post Image" class="img-fluid project-image rounded">
                         </div>
-                    </article>
+                    </a>
+                    <h2 class="h4 mt-3">{{ projeto.titulo }}</h2>
+                    <p>{{ projeto.descricao }}</p>
+                    <div class="d-flex justify-content-between text-muted">
+                        <span>{{ projeto.categoria }}</span>
+                        <span>June 24, 2020</span>
+                    </div>
+                    <div class="progress my-3">
+                        <div 
+                            class="progress-bar progress-bar-striped progress-bar-animated bg-success" 
+                            role="progressbar" 
+                            style="width: {{ projeto.percentual_projeto }}%;" 
+                            aria-valuenow="{{ projeto.total_investidor }}" 
+                            aria-valuemin="0" 
+                            aria-valuemax="100">
+                            {{ projeto.percentual_projeto }}%
+                        </div>
+                    </div>
+                    <div>
+                        {{ projeto.total_investidor }} R$ / {{ projeto.meta_investidor }} R$
+                    </div>
+                </article>
                 {% empty %}
                     <div class="card project-card mb-3">
                         <div class="alert alert-primary d-flex align-items-center" role="alert">
@@ -88,7 +116,7 @@
                             <img src="https://via.placeholder.com/50" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="width: 100px; height: 100px;">
                         {% endif %}
                         <h5 class="card-title">{{ usuario.nome }}</h5>
-                        <p class="card-text">{{ usuario.sobre }}</p>
+                        <p class="card-text">{{ usuario.descricao }}</p>
                         <a href="{% url 'perfil' %}" class="btn btn-primary btn-sm">Ver perfil</a>
                     </div>
                 </div>
@@ -104,9 +132,9 @@
             </ul>
         </nav>
     </main>
-    <footer class="bg-dark text-white py-3">
+    <footer class="bg-dark py-3">
         <div class="container text-center">
-            <p class="mb-0">Copyright 2024 Smartcode Company Co. Ltd. | Design by a gente <a href="https://templatemo.com" class="text-white text-decoration-none">a gente</a></p>
+            <p class="mb-0">Copyright 2024 Smartcode Company Co. Ltd. | Design by a gente 
         </div>
     </footer>
 {% else %}

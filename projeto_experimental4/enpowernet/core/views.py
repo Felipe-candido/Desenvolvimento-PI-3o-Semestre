@@ -19,6 +19,8 @@ from PIL import Image
 from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import sys
+from django.db.models import Sum, DecimalField
+
 
 
 def add_usuario2(request):                 
@@ -197,9 +199,14 @@ def editar_usuario(request):
 def index(request):
     usuario = request.user
     project = projeto.objects.all()
+    total_projetos = projeto.objects.count()
+    
+    
+    
     context = {
         "projetos": project,
-        "usuario": usuario
+        "usuario": usuario,
+        "total_projetos": total_projetos,
     }
     return render(request, 'index/index.html', context)
 
