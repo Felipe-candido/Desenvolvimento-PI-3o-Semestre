@@ -12,6 +12,10 @@ body {
     max-width: 80%;
 }
 
+.container{
+    margin-top: 0;
+}
+
 .lead{
     margin-top: 25px;
     margin-bottom: 20px;
@@ -226,9 +230,7 @@ footer{
 .stats-card h3, .stats-card h4 {
     margin: 0;
 }
-.stats-card .stat-item {
-    margin-bottom: 20px;
-}
+
 .stats-card .stat-item:last-child {
     margin-bottom: 0;
 }
