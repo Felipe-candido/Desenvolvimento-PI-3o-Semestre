@@ -1,5 +1,6 @@
 import crcmod
 import qrcode
+import os
 
 class Payload():
     def __init__(self, nome, chavepix, valor, cidade ,txtId):
@@ -75,9 +76,15 @@ class Payload():
         self.qrcodegen(self.payload_retorno)
 
     def qrcodegen(self, payload):
-          self.qrcode = qrcode.make(payload)
-          self.qrcode.save('pixqrcode.png')
+        self.qrcode = qrcode.make(payload)
+        
+        static_dir = os.path.join(os.path.dirname(__file__), 'static')
+        os.makedirs(static_dir, exist_ok=True)  
+        
+
+        qrcode_path = os.path.join(static_dir, 'pixqrcode.png')
+        self.qrcode.save(qrcode_path)
 
 if __name__ == '__main__':
-    p = Payload('Darlan dos santos', 'darlan.junior22@gmail.com', '422.00', 'Araras', 'Cidade02')
+    p = Payload('Darlan dos santos', 'darlanj207@gmail.com', '422.00', 'Araras', 'Cidade02')
     p.PayloadGen()
