@@ -282,6 +282,9 @@ def adicionar_comentario(request, projeto_id):
     }
     return render(request, 'index/ver_projeto.html', context)
 
+def sobre(request):
+    return render(request, 'index/sobre.html', {'user': request.user})
+
     
 
 

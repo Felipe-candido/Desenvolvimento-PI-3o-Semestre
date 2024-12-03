@@ -31,7 +31,7 @@ body {
 }
 
 .card-container:hover {
-    transform: scale(1.01); 
+    transform: scale(1.001); 
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
 }
 
@@ -85,8 +85,8 @@ body {
 }
 
 .botao-grande {
-    font-size: 1.5rem; 
-    padding: 1rem 3rem; 
+    font-size: 20pt; 
+    padding: 20px 60px; 
     border-radius: 35px;
     background: linear-gradient(to right, #f27025, #f2a63e); 
     text-decoration: none;
