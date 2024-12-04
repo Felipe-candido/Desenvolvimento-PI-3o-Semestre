@@ -285,6 +285,18 @@ def adicionar_comentario(request, projeto_id):
 def sobre(request):
     return render(request, 'index/sobre.html', {'user': request.user})
 
+def categoria(request, categoria):
+    projetos_filtrados = projeto.objects.filter(categoria=categoria)
+    usuario = request.user
+    
+    
+    context = {
+        "projetos": projetos_filtrados,
+        "usuario": usuario,
+        'categoria': categoria,
+    }
+    return render(request, 'index/categorias.html', context)
+
     
 
 
