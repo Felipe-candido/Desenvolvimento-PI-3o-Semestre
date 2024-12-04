@@ -9,14 +9,14 @@
         <div class="row featurette mt-0 align-items-center">
             <div class="col-md-7 texto-principal">
                 <h1 class="featurette-heading fw-bold lh-1 text-light titulo-principal">
-                    Conectamos você ao futuro do empreendedorismo
+                    Conectamos você ao futuro do empreendedorismo.
                 </h1>
                 <p class="lead">
                     Nossa missão é criar pontes entre startups, empreendedores e investidores para transformar ideias inovadoras em grandes realizações.
                 </p>
                 <div class="mt-4 d-flex gap-3 botoes">
                     <a href="{% url 'add_usuario2' %}" class="botao-grande">Cadastre-se</a>
-                    <a href="{% url 'realizar_login' %}" class="botao-grande">Login</a>
+                    <a href="{% url 'realizar_login' %}" class="botao-grande">Entrar com sua conta</a>
                 </div>
             </div>
             <div class="col-md-5 text-center">
@@ -74,11 +74,11 @@
     </div>
 </div>
 
-<script>
+<!-- <script>
     {% if messages %}
         {% for message in messages %}
             alert("{{ message|escapejs }}");
         {% endfor %}
     {% endif %}
-</script>
+</script> -->
 {% endblock %}

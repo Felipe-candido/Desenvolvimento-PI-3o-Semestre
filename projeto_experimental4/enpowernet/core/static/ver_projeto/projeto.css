@@ -114,29 +114,43 @@ body {
 
 .project-description,
 .categories {
+    
     text-align: center; 
     margin-bottom: 40px;
 }
 
 
 .project-description h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 40px;
     font-weight: 600;
     color: #003366;
     margin-bottom: 15px;
     display: flex;
 }
+
+
+.categories {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
 
 .categories h4 {
     font-size: 40px;
     font-weight: 600;
     color: #003366;
     margin-bottom: 15px;
-    display: flex;
 }
 
 .project-description p,
 .categories-list li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
     font-size: 23px;
     color: #303030;
     line-height: 1.6;
@@ -151,19 +165,25 @@ body {
 .categories-list {
     list-style-type: none;
     padding: 0;
-    display: flex;  
+    display: flex; 
+    justify-content: center; 
+    gap: 15px; 
+    flex-wrap: wrap; 
 }
 
 .categories-list li {
     background-color: #e9b421;
     color: #fff;
-    padding: 10px 50px;
+    padding: 10px 30px; 
     border-radius: 5px;
-    margin: 5px 0;
-    display: flex;
+    margin: 5px;
     font-size: 20px;
     text-transform: uppercase;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px; 
 }
 
 

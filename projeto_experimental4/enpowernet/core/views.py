@@ -32,7 +32,7 @@ def add_usuario2(request):
             user.UUID = str(uuid.uuid4()) 
             user.set_password(form.cleaned_data['senha'])
             user.save()
-            messages.success(request, "Usuário registrado com sucesso!")
+            # messages.success(request, "Usuário registrado com sucesso!")
             return redirect('home')
         
         context = {'form': form}

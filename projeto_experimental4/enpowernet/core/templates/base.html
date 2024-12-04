@@ -27,22 +27,29 @@
                     <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" aria-current="page">Projetos</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Contatos</a></li>
                     <li class="nav-item"><a href="{% url 'sobre' %}" class="nav-link">Sobre</a></li>
+                    <li class="nav-item"><a href="{% url 'sobre' %}" class="nav-link">Faq</a></li>
                 </ul>
   
                 <div class="text-end">
                     {% if user.is_authenticated %}
                         <div class="btn-group">
+                            {% if user.foto %}
                             <div type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="{{ user.foto.url }}" width="38" height="38" alt="Foto do Usuário" class="rounded-circle">
                             </div>
+                            {% else %}
+                            <div type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{% static 'perfil/imagens/sem_perfil.png' %}" width="38" height="38" alt="Foto do Usuário" class="rounded-circle">
+                            </div>
+                            {% endif %}
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><button class="dropdown-item" type="button" onclick="window.location.href='{% url 'perfil' %}'">Perfil</button></li>
-                                <li><button class="dropdown-item" type="button" onclick="window.location.href='{% url 'logout' %}'">Logout</button></li>
+                                <li><button class="dropdown-item" type="button" onclick="window.location.href='{% url 'logout' %}'">Sair da conta</button></li>
                             </ul>
                         </div>
                     {% else %}
-                        <button type="button" class="btn btn-outline-light me-2" onclick="window.location.href='{% url 'realizar_login' %}'">Login</button>
-                        <button type="button" class="btn btn-warning" onclick="window.location.href='{% url 'add_usuario2' %}'">Sign-up</button>
+                        <button type="button" class="btn btn-outline-light me-2" onclick="window.location.href='{% url 'realizar_login' %}'">Entrar</button>
+                        <button type="button" class="btn btn-warning" onclick="window.location.href='{% url 'add_usuario2' %}'">Cadastrar</button>
                     {% endif %}
                 </div>
             </div>

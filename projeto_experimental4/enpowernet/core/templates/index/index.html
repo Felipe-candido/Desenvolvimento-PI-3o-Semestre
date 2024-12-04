@@ -50,11 +50,11 @@
                             </button>
                         </form>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><a href="#" class="text-decoration-none">Travel</a></li>
-                            <li class="list-group-item"><a href="#" class="text-decoration-none">Music</a></li>
-                            <li class="list-group-item"><a href="#" class="text-decoration-none">Technology</a></li>
+                            <li class="list-group-item"><a href="#" class="text-decoration-none">Viagem</a></li>
+                            <li class="list-group-item"><a href="#" class="text-decoration-none">Arte</a></li>
+                            <li class="list-group-item"><a href="#" class="text-decoration-none">Tecnologia</a></li>
                             <li class="list-group-item"><a href="#" class="text-decoration-none">Design</a></li>
-                            <li class="list-group-item"><a href="#" class="text-decoration-none">Education</a></li>
+                            <li class="list-group-item"><a href="#" class="text-decoration-none">Educação</a></li>
                         </ul>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                 <article class="mb-4 project-card text-center mx-auto" style="max-width: 600px;">
                     <a href="{% url 'ver_projeto' projeto.id_mongo %}" class="text-decoration-none text-dark">
                         <div class="project-image-container">
-                            <img src="{{ projeto.projeto_logo.url }}" alt="Post Image" class="img-fluid project-image rounded">
+                            <img src="{{ projeto.projeto_logo.url }}" alt="imagem do post" class="img-fluid project-image rounded">
                         </div>
                     </a>
                     <h2 class="h4 mt-3">{{ projeto.titulo }}</h2>
@@ -116,7 +116,7 @@
                         {% if usuario.foto %}
                             <img src="{{ usuario.foto.url }}" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="width: 100px; height: 100px;">
                         {% else %}
-                            <img src="https://via.placeholder.com/50" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="width: 100px; height: 100px;">
+                        <img src="{% static 'perfil/imagens/sem_perfil.png' %}" alt="Foto do Usuário" class="rounded-circle" style="width: 100px; height: 100px;">
                         {% endif %}
                         <h5 class="card-title">{{ usuario.nome }}</h5>
                         <p class="card-text">{{ usuario.descricao }}</p>
