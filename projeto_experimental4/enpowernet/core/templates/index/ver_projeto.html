@@ -25,9 +25,13 @@
             <div class="col-md-12"> 
                 <div class="profile-card card shadow-sm">
                     {% if usuario.foto %}
-                        <img src="{{ usuario.foto.url }}" alt="Imagem do Dono" class="profile-img">
+                        <a href="{% url 'perfil_publico' projeto.id_mongo %}" class="text-decoration-none text-dark">
+                            <img src="{{ usuario.foto.url }}" alt="Imagem do Dono" class="profile-img">
+                        </a>
                     {% else %}
-                        <img src="{% static 'home/imagens/icone-logo.png' %}" alt="Imagem do Dono" class="profile-img">
+                        <a href="{% url 'perfil_publico' projeto.id_mongo %}" class="text-decoration-none text-dark">
+                            <img src="{% static 'home/imagens/icone-logo.png' %}" alt="Imagem do Dono" class="profile-img">
+                        </a>
                     {% endif %}
                     <h2>{{ usuario.nome }}</h2>
                     <p class="text-muted">{{ usuario.sobre }}</p>

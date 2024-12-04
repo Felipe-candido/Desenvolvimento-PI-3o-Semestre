@@ -297,6 +297,22 @@ def categoria(request, categoria):
     }
     return render(request, 'index/categorias.html', context)
 
+
+@login_required
+def perfil_publico(request, projeto_id):
+    Projeto = get_object_or_404(projeto, id_mongo=projeto_id)  
+    Usuario = get_object_or_404(usuario, UUID=Projeto.user_id)
+    projetos = projeto.objects.filter(user_id=Usuario)
+
+    
+    context = {
+        'projetos': projetos,
+        'usuario': Usuario,
+    }
+ 
+    return render(request, 'index/perfil_publico.html', context)
+
+
     
 
 
