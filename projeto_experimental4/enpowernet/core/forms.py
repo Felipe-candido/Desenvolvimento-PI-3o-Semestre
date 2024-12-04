@@ -61,7 +61,7 @@ class cadastro_forms(forms.ModelForm):
         data_nascimento = self.cleaned_data['data_nascimento']
         hoje = date.today()
         if data_nascimento > hoje:
-            raise ValidationError('Data inválida')
+            raise ValidationError('Data de nascimento não pode estar no futuro.')  
         return data_nascimento
         
         

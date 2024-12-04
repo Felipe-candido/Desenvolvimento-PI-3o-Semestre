@@ -135,3 +135,5 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.usuario'  # Altere 'core' para o nome do seu aplicativo
+
+LOGIN_URL = '/login/' #se algo falhar nas próximas commits, é por conta dessa linha
