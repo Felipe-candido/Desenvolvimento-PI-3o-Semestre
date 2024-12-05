@@ -78,7 +78,7 @@ class Payload():
     def qrcodegen(self, payload):
         self.qrcode = qrcode.make(payload)
         
-        static_dir = os.path.join(os.path.dirname(__file__), 'static')
+        static_dir = os.path.join(os.path.dirname(__file__), 'core/static')
         os.makedirs(static_dir, exist_ok=True)  
         
 

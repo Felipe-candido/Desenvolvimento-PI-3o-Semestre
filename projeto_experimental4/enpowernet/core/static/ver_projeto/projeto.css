@@ -271,3 +271,20 @@ body {
         padding: 8px;
     }
 }
+
+.botoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.botao-grande {
+    font-size: 20pt; 
+    padding: 20px 60px; 
+    border-radius: 35px;
+    background: linear-gradient(to right, #f27025, #f2a63e); 
+    text-decoration: none;
+    color: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}

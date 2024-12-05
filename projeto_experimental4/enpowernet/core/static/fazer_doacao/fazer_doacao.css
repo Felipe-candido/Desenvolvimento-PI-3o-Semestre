@@ -1,0 +1,34 @@
+.card {
+    max-width: 600px;
+    margin: auto;
+    margin-top: 80px;
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 2rem;
+}
+
+.form-label {
+    font-size: 1.2rem;
+}
+
+.btn {
+    font-size: 1.2rem;
+    padding: 10px;
+}
+
+.qr-code {
+    display: none;
+    text-align: center;
+}
+
+#donationAmount {
+    font-size: 1.2rem;
+    height: 50px;
+}
+
+img {
+    max-width: 250px;
+    margin: auto;
+}

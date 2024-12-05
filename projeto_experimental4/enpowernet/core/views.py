@@ -312,6 +312,21 @@ def perfil_publico(request, projeto_id):
  
     return render(request, 'index/perfil_publico.html', context)
 
+@login_required
+def doacao(request, projeto_id):
+    Projeto = get_object_or_404(projeto, id_mongo=projeto_id)  
+    if request.method == 'POST':
+        valor_doacao = float(request.POST.get('donationAmount', 0))
+        if valor_doacao > 0:
+            Projeto.total_investidor += valor_doacao
+            Projeto.save()
+            messages.success(request, 'Doação realizada com sucesso!')
+            return redirect('ver_projeto', projeto_id=Projeto.id_mongo)
+        else:
+            messages.error(request, 'Por favor, insira um valor válido para doação.')
+
+    return render(request, 'index/fazer_doacao.html', {'user': request.user, 'projeto': projeto})
+
 
     
 

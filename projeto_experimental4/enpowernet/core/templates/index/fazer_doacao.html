@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Perfil do Usuário{% endblock %}
+
+{% block css_extra %}
+<link rel="stylesheet" href="{% static 'fazer_doacao/fazer_doacao.css' %}">
+{% endblock %}
+
+
+{% block conteudo %}
+    {% if user.is_authenticated %}
+    <div class="container">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title text-center">Faça sua Doação</h5>
+                <form id="donationForm" method="POST">
+                    {% csrf_token %}
+                    <div id="donationInput">
+                        <div class="mb-3">
+                            <label for="donationAmount" class="form-label">Insira o valor da doação</label>
+                            <input type="number" name="donationAmount" class="form-control" id="donationAmount" placeholder="Ex: 50.00" required>
+                        </div>
+                        <button type="button" class="btn btn-primary w-100" id="showQrCodeBtn">Gerar QR Code</button>
+                    </div>
+                    <div id="qrCodeSection" class="qr-code" style="display: none;">
+                        <img src="{% static 'pixqrcode.png' %}" alt="QR Code" class="img-fluid mb-3">
+                        <button type="submit" class="btn btn-success w-100">Confirmar Pagamento</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('showQrCodeBtn').addEventListener('click', function () {
+            const donationAmount = document.getElementById('donationAmount').value;
+            if (donationAmount) {
+                document.getElementById('donationInput').style.display = 'none';
+                document.getElementById('qrCodeSection').style.display = 'block';
+            } else {
+                alert('Por favor, insira um valor para a doação.');
+            }
+        });
+
+        const projetoId = "{{ projeto.id_mongo }}"; 
+        document.getElementById('donationForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            alert('Pagamento confirmado! Obrigado pela sua doação.');
+            window.location.href = "{% url 'index' %}";
+        });
+    </script>
+    {% endif %}
+{% endblock %}
