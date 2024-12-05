@@ -103,6 +103,13 @@ class View_tests_login(TestCase):
         response = self.client.get(reverse('perfil'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index/perfil.html')
+    
+    def teste_perfil_publico(self):
+        self.client.login(email='gabriel.futurisss@gmail.com', password='sucodelaranja')
+        self.projeto_obj = projeto.objects.create(user_id=self.user.UUID, titulo='Projeto renovado')
+        response = self.client.get(reverse(f'perfil_publico/{str(self.projeto_obj.id_mongo)}'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'index/perfil_publico.html')
 
    
 
@@ -118,6 +125,7 @@ class ProjetoTests(TestCase):
             password = 'sucodelaranja'
         )
         self.client.login(email='gabriel.futurisss@gmail.com', password='sucodelaranja')
+        self.projeto_obj = projeto.objects.create(user_id=User.UUID, titulo = 'Super projeto')
 
 
     def test_editar_projeto_view(self):
@@ -128,3 +136,14 @@ class ProjetoTests(TestCase):
         self.assertEqual(response.status_code, 302)
         projeto_obj.refresh_from_db()
         self.assertEqual(projeto_obj.titulo, 'Projeto renovado')
+
+    # def test_excluir_projeto(self):
+    #     self.assertTrue(projeto.objects.filter(id_mongo=self.projeto_obj.id_mongo).first())
+    #     url = reverse('excluir_projeto', args=[self.projeto_obj.id_mongo])
+    #     response = self.client.post(url)
+    #     self.assertEqual(response.status_code, 302)
+    #     self.assertEqual(projeto.objects.filter(id_mongo=self.projeto_obj.id_mongo).first(), None) 
+
+    
+
+        
