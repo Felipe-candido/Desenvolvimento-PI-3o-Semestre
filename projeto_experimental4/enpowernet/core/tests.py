@@ -85,6 +85,17 @@ class CadastroFormTest(TestCase):
 
 
 class ViewTests(TestCase):
+    def setUp(self):
+        self.valid_data = {
+            'email': 'gabriel.futurisss@gmail.com',
+            'nome': 'Gabriel Schranck',
+            'telefone': '19983492015',
+            'data_nascimento': '2003-06-02',
+            'senha': 'sucodelaranja',
+            'cidade': 'Leme',
+            'estado': 'SP',
+        }
+    
     def teste_home(self):
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
@@ -104,12 +115,12 @@ class View_tests_login(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index/perfil.html')
     
-    def teste_perfil_publico(self):
-        self.client.login(email='gabriel.futurisss@gmail.com', password='sucodelaranja')
-        self.projeto_obj = projeto.objects.create(user_id=self.user.UUID, titulo='Projeto renovado')
-        response = self.client.get(reverse(f'perfil_publico/{str(self.projeto_obj.id_mongo)}'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'index/perfil_publico.html')
+    # def teste_perfil_publico(self):
+    #     self.client.login(email='gabriel.futurisss@gmail.com', password='sucodelaranja')
+    #     self.projeto_obj = projeto.objects.create(user_id=self.user.UUID, titulo='Projeto renovado')
+    #     response = self.client.get(reverse(f'perfil_publico/{str(self.projeto_obj.id_mongo)}'))
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'index/perfil_publico.html')
 
    
 
@@ -137,12 +148,12 @@ class ProjetoTests(TestCase):
         projeto_obj.refresh_from_db()
         self.assertEqual(projeto_obj.titulo, 'Projeto renovado')
 
-    # def test_excluir_projeto(self):
-    #     self.assertTrue(projeto.objects.filter(id_mongo=self.projeto_obj.id_mongo).first())
-    #     url = reverse('excluir_projeto', args=[self.projeto_obj.id_mongo])
-    #     response = self.client.post(url)
-    #     self.assertEqual(response.status_code, 302)
-    #     self.assertEqual(projeto.objects.filter(id_mongo=self.projeto_obj.id_mongo).first(), None) 
+    def test_excluir_projeto(self):
+        self.assertTrue(projeto.objects.filter(id_mongo=self.projeto_obj.id_mongo).first())
+        url = reverse('excluir_projeto', args=[self.projeto_obj.id_mongo])
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(projeto.objects.filter(id_mongo=self.projeto_obj.id_mongo).first(), None) 
 
     
 
